@@ -2,7 +2,7 @@ package jpl.ch02.ex10;
 
 public class Vehicle {
 
-	public double Id;
+	public double id;
 	public String owner;
 	public double speed;
 	public double direction;
@@ -10,11 +10,14 @@ public class Vehicle {
 	private static  double nextId = 0;
 
 	Vehicle () {
-		this.Id = nextId++;
+		this.id = nextId++;
 	}
 
 	Vehicle (String name) {
 		this.owner = name;
+	}
+	public String toString() {
+		return "[ID = "+ id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
 	}
 
 }
