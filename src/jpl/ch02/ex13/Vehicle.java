@@ -2,26 +2,44 @@ package jpl.ch02.ex13;
 
 public class Vehicle {
 
-	private double Id;
-	private String owner;
-	private double speed;
-	private double direction;
+	private final long Id;   // 設定後変わることがないため、変更を許すメソッドを持つべきではない。
+	private String owner;  // 変わる可能性があるため、変更を許すメソッドを持つべきである。
+	private double speed; // 変わる可能性が大いにあるため、変更を許すメソッドを持つべきである。
+	private double direction; //変わる可能性が大いにあるため、変更を許すメソッドを持つべきである
 
-	private static  double nextId = 0;
+	private static long nextId = 0; //クラス変数でありインスタンス生成時のみ加算されるという決まりのため変更を許すメソッドを持つべきではない。
 
 	Vehicle () {
 		this.Id = nextId++;
 	}
 
 	Vehicle (String name) {
-		this.setOwner(name);
+		this();
+		this.owner = name;
 	}
 
 	/**
-	 * Idを返すゲッターメソッド
+	 * 現在使われている識別番号の最大値を得ます。
+	 */
+	static double getMaxId() {
+		return nextId-1;
+	}
+
+	public String toString() {
+		return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
+	}
+	/**
+	 * Idを取得するゲッターメソッド
 	 */
 	public double getId() {
 		return Id;
+	}
+
+	/**
+	 * 次のIdを取得するゲッターメソッド
+	 */
+	public double getNextId() {
+		return nextId;
 	}
 	/**
 	 * 所有者を取得するゲッターメソッド
@@ -30,7 +48,7 @@ public class Vehicle {
 		return owner;
 	}
 	/**
-	 * 所有者を設定するゲッターメソッド
+	 * 所有者を設定するセッターメソッド
 	 */
 	public void setOwner(String owner) {
 		this.owner = owner;
@@ -42,7 +60,7 @@ public class Vehicle {
 		return speed;
 	}
 	/**
-	 * スピードを設定するゲッターメソッド
+	 * スピードを設定するセッターメソッド
 	 */
 	public void setSpeed(double speed) {
 		this.speed = speed;
@@ -54,7 +72,7 @@ public class Vehicle {
 		return direction;
 	}
 	/**
-	 * 方向を設定するゲッターメソッド
+	 * 方向を設定するセッターメソッド
 	 */
 	public void setDirection(double direction) {
 		this.direction = direction;

@@ -1,10 +1,10 @@
-package jpl.ch02.ex14;
+package jpl.ch02.ex16;
 
 
 public class LinkedList {
 
-	private Object obj; // 変更されることが考えられるため、変更を許すメソッドを持つべきである。
-	private LinkedList nextLinkedList;  // 変更されることが考えられるため、変更を許すメソッドを持つべきである。
+	private Object obj;
+	private LinkedList nextLinkedList;
 
 	LinkedList(Object obj) {
 		this.obj = obj;
@@ -14,6 +14,17 @@ public class LinkedList {
 		this.nextLinkedList = linkedList;
 	}
 
+	/**
+	 * リスト内の要素の数を得ます。
+	 */
+	public int getlistCount(LinkedList linkedList) {
+        int count = 1;
+
+		if (linkedList.getNextLinkedList() != null) {
+			count += getlistCount(linkedList.getNextLinkedList());
+		}
+		return count;
+	}
 	public String toString() {
 		String desc = obj.toString();
 		if (nextLinkedList != null) {

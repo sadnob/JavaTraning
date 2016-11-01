@@ -2,22 +2,31 @@ package jpl.ch02.ex10;
 
 public class Vehicle {
 
-	public double id;
+	public final long Id;
 	public String owner;
 	public double speed;
 	public double direction;
 
-	private static  double nextId = 0;
+	public static long nextId = 0;
 
 	Vehicle () {
-		this.id = nextId++;
+		this.Id = nextId++;
 	}
 
 	Vehicle (String name) {
+		this();
 		this.owner = name;
 	}
+
+	/**
+	 * 現在使われている識別番号の最大値を得ます。
+	 */
+	static double getMaxId() {
+		return nextId-1;
+	}
+
 	public String toString() {
-		return "[ID = "+ id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
+		return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
 	}
 
 }

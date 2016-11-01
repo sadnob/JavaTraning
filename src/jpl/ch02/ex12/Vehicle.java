@@ -1,4 +1,4 @@
-package jpl.ch02.ex09;
+package jpl.ch02.ex12;
 
 public class Vehicle {
 
@@ -23,6 +23,10 @@ public class Vehicle {
 	 */
 	static double getMaxId() {
 		return nextId-1;
+	}
+
+	public String toString() {
+		return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
 	}
 
 }

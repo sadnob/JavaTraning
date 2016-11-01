@@ -1,4 +1,4 @@
-package jpl.ch02.ex11;
+package jpl.ch02.ex12;
 
 public class LinkedList {
 	public Object obj;

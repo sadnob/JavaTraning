@@ -1,4 +1,4 @@
-package jpl.ch02.ex07;
+package jpl.ch02.ex08;
 
 
 public class Vehicle {
