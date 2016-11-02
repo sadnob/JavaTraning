@@ -1,13 +1,15 @@
-package jpl.ch02.ex13;
+package jpl.ch02.ex18;
 
 public class Vehicle {
 
-        private final long Id;   // 設定後変わることがないため、変更を許すメソッドを持つべきではない。
-        private String owner;  // 変わる可能性があるため、変更を許すメソッドを持つべきである。
-        private double speed; // 変わる可能性が大いにあるため、変更を許すメソッドを持つべきである。
-        private double direction; //変わる可能性が大いにあるため、変更を許すメソッドを持つべきである
+        private final long Id;
+        private String owner;
+        private double speed;
+        private double direction;
+        public static final String TURN_LEFT = "TURN_LEFT";
+        public static final String TURN_RIGHT = "TURN_RIGHT";
 
-        private static long nextId = 0; //クラス変数でありインスタンス生成時のみ加算されるという決まりのため変更を許すメソッドを持つべきではない。
+        private static long nextId = 0;
 
         Vehicle () {
                 this.Id = nextId++;
@@ -18,6 +20,14 @@ public class Vehicle {
                 this.owner = name;
         }
 
+        public static void main(String[] args) {
+
+            Vehicle vehicle = new Vehicle(args[0]);
+
+            System.out.println(vehicle);
+
+        }
+
         /**
          * 現在使われている識別番号の最大値を得ます。
          */
@@ -26,39 +36,49 @@ public class Vehicle {
         }
 
         /**
-         * toStringメソッド
+         *現在のスピードを渡された値に変更する。
          */
-        public String toString() {
-                return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
+        public void changeSpeed(double speed) {
+                setSpeed(speed);
+        }
 
+        /**
+         *渡された角度だけ回転します。
+         */
+        public void turn(double direction) {
+    this.speed += direction;
         }
         /**
-         * IDを取得するゲッターメソッド
+         *右又は左に90度回転します。
          */
+        public void turn(String direction) {
+            if (direction.equals(TURN_LEFT)) {
+            this.direction -= 90;
+            } else if (direction.equals(TURN_RIGHT)) {
+            this.direction += 90;
+            }
+        }
+
+        public String toString() {
+                return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + " direction = " + direction + " ]";
+        }
+
         public double getId() {
                 return Id;
         }
-        /**
-         * 次のIDを取得するゲッターメソッド
-         */
+
         public double getNextId() {
                 return nextId;
         }
-        /**
-         * 所有者を取得するゲッターメソッド
-         */
+
         public String getOwner() {
                 return owner;
         }
-        /**
-         * スピードを取得するゲッターメソッド
-         */
+
         public double getSpeed() {
                 return speed;
         }
-        /**
-         * 方向を取得するゲッターメソッド
-         */
+
         public double getDirection() {
                 return direction;
         }
