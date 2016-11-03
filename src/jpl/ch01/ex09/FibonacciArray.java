@@ -7,13 +7,11 @@ public class FibonacciArray {
 
 	public static void main(String[] args) {
 		int[] fibonacci = new int[MAX];
-        int lo = 1;
-        int hi = 1;
-        fibonacci[0] = lo;
-        fibonacci[1] = hi;
-        for (int i= 2; hi < MAX; i++) {
-        	hi = fibonacci[i-1] + fibonacci[i-1];  // 新しいhiを配列に格納
-        	fibonacci[i] = hi;
+
+        fibonacci[0] = 1;
+        fibonacci[1] = 1;
+        for (int i= 2; fibonacci[i-1] < MAX; i++) {
+        	fibonacci[i] = fibonacci[i-2] + fibonacci[i-1];
        }
         System.out.println(TITLE);
         for (int i=0; fibonacci[i] < MAX; i++) {

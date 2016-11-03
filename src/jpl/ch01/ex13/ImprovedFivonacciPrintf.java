@@ -1,6 +1,6 @@
 package jpl.ch01.ex13;
 
-public class ImprovedFivoacciPrintf {
+public class ImprovedFivonacciPrintf {
 
 	static final int MAX_INDEX = 9;
 

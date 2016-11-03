@@ -1,7 +1,10 @@
 package jpl.ch02.ex12;
 
 public class Vehicle {
-
+	/*
+	 * 複数のVehicleオブジェクトを引数に取り、現在止まっているオブジェクトの数をカウントする等
+	 * のメソッドを実装する際には必要である。
+	 */
 	public final long Id;
 	public String owner;
 	public double speed;

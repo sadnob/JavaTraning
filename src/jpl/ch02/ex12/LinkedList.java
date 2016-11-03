@@ -1,6 +1,12 @@
 package jpl.ch02.ex12;
 
+
 public class LinkedList {
+
+	/*
+	 * リストの中から複数指定したObjectのうち１つでも当てはまるObjectを持つLinkedList要素の数を返す等
+	 * のメソッドを実装する際には必要である。
+	 */
 	public Object obj;
 	public LinkedList nextLinkedList;
 

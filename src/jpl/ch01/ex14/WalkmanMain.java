@@ -9,7 +9,9 @@ public class WalkmanMain {
 		WalkmanVer3 walkmanVer3 = new WalkmanVer3();
 
 		walkmanVer1.display();
+		System.out.println("--------------------------------------------------------------------------");
 		walkmanVer2.functionIntoroduction();
+		System.out.println("--------------------------------------------------------------------------");
 		walkmanVer3.functionIntoroduction();
 
 	}

@@ -3,7 +3,10 @@ package jpl.ch01.ex16;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-public class BadDataSetException extends Exception{}
+public class BadDataSetException extends Exception{
+	      String dataName;
+	      IOException ioException;
+}
 
 	class MyUtilities {
 		public double [] getDateSet (String setName) throws BadDataSetException {
@@ -13,7 +16,10 @@ public class BadDataSetException extends Exception{}
 				in = new FileInputStream(file);
 				return readDateSet(in);
 			} catch (IOException e) {
-				throw new BadDataSetException();
+				BadDataSetException catchException =new BadDataSetException();
+				catchException.dataName = setName;
+				catchException.ioException = e;
+				throw  catchException;
 			} finally {
 				try {
 					if (in != null)

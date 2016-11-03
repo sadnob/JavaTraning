@@ -2,20 +2,20 @@ package jpl.ch01.ex15;
 
 public class SimpleAddRemove implements AddRemove{
 
-	private String[] names = new String[10];
-	private Object[] values = new Object[10];
+	private String[] names = {"A", "B", "C", "D", "E"};
+	private Object[] values = new Object[names.length];
 
 
 	@Override
-	public void add(String name, Object value) {
+	public boolean add(String name, Object value) {
+		boolean addCheck = false;
 			for (int i=0; i < names.length; i++) {
 				if (names[i].equals(name)){
 					values[i] = value;
-					System.out.println("正常に追加されました。");
-					break;
+					addCheck = true;
 				}
 			}
-			System.out.println("名前が見つかりませんでした。");
+			return addCheck;
 	}
 
 	@Override
@@ -28,13 +28,14 @@ public class SimpleAddRemove implements AddRemove{
 	}
 
 	@Override
-	public void remove(String name) {
+	public boolean remove(String name) {
+		boolean removeCheck = false;
 		for (int i=0; i < names.length; i++) {
 			if (names[i].equals(name))
 				 values[i] = null;
-				System.out.println("正常に削除されました。");
+			removeCheck = true;
 		}
-		System.out.println("名前が見つかりませんでした。");
+		return removeCheck;
 	}
 
 }
