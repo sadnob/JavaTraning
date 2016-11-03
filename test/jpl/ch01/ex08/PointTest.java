@@ -1,76 +1,50 @@
 package jpl.ch01.ex08;
 
 import static org.hamcrest.CoreMatchers.*;
-import static org.hamcrest.MatcherAssert.*;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
 public class PointTest {
 
-    Point point1 = new Point();
-    Point point2 = new Point();
-    Point point3 = new Point();
+	double testX = 1.5;
+	double testY = 3.0;
+	Point movePoint = new Point();
 
-/*------------------------ClearTest-----------------------------*/
-        @Test
-        public void testClear() {
+	@Test
+	public void testMoveAndClear() {
+		Point testPoint = new Point();
+		testPoint.move(testX, testY);
+		assertThat(testPoint.x, is(testX));
+		assertThat(testPoint.y, is(testY));
 
-        }
+		testPoint.clear();
+		assertThat(testPoint.x, is(0.0));
+		assertThat(testPoint.y, is(0.0));
 
-/*------------------------MoveTest-----------------------------*/
-        @Test
-        public void testMove1() {
+	}
 
-        }
+	@Test
+	public void testMoveEqual() {
+		Point testPoint = new Point();
+		movePoint.x = 2.0;
+		movePoint.y = 6.0;
+		testPoint.moveEqual(movePoint);
+		assertThat(movePoint.x, is(testPoint.x));
+		assertThat(movePoint.y, is(testPoint.y));
+	}
 
-        @Test
-        public void testMove2() {
+	@Test
+	public void testDistance() {
+		Point testPointA = new Point();
+		Point testPointB = new Point();
+		testPointA.x = testX;
+		testPointA.y = testX;
+		testPointB.x = 1.5;
+		testPointB.y = 4.5;
 
-        }
+		assertThat(testPointA.distance(testPointB), is(3.0));
 
-        @Test
-        public void testMove3() {
-
-        }
-
-/*------------------------MoveEqualTest-----------------------------*/
-        @Test
-        public void testMoveEqual1() {
-
-            assertThat(point1.moveEqual(point2), is(""));
-        }
-
-        @Test
-        public void testMoveEqual2() {
-
-            assertThat(point1.moveEqual(point2), is(""));
-        }
-
-        @Test
-        public void testMoveEqual3() {
-
-            assertThat(point1.moveEqual(point2), is(""));
-        }
-
-/*------------------------distanceTest-----------------------------*/
-        @Test
-        public void Testdistance1() {
-
-            assertThat(point1.distance(point2), is(""));
-        }
-
-        @Test
-        public void Testdistance2() {
-
-            assertThat(point1.distance(point2), is(""));
-        }
-
-        public void Testdistance3() {
-
-            assertThat(point1.distance(point2), is(""));
-        }
-
-
-
+	}
 
 }
