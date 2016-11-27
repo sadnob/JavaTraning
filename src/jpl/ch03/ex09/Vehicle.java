@@ -1,5 +1,4 @@
-package jpl.ch03.ex06;
-
+package jpl.ch03.ex09;
 
 public class Vehicle {
 
@@ -7,8 +6,6 @@ public class Vehicle {
         private String owner;
         private double speed;
         private double direction;
-        private EnergySource gasTank;
-        private EnergySource battery;
         public static final String TURN_LEFT = "TURN_LEFT";
         public static final String TURN_RIGHT = "TURN_RIGHT";
 
@@ -16,13 +13,22 @@ public class Vehicle {
 
         protected Vehicle () {
                 this.Id = nextId++;
-                this.gasTank = new GasTank();
-                this.battery = new Battery();
         }
 
         protected Vehicle (String name) {
                 this();
                 this.owner = name;
+        }
+
+        /**
+         * メインクラス
+         */
+        public static void main(String[] args) {
+
+            Vehicle vehicle = new Vehicle(args[0]);
+
+            System.out.println(vehicle);
+
         }
 
         /**
@@ -63,22 +69,8 @@ public class Vehicle {
             }
         }
 
-        /**
-         * toStringメソッド
-         * 表示形式：[ID = ?  Owner = ?] [Speed = ? Direction = ? ]
-         */
         public String toString() {
                 return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + " direction = " + direction + " ]";
-        }
-
-        /**
-         * 動力源が空でないことを保証します。
-         */
-        public boolean start () {
-        	if(gasTank.empty() && battery.empty()) {
-        		return true;
-        	}
-        	return false;
         }
 
         public double getId() {
@@ -113,17 +105,6 @@ public class Vehicle {
                 this.direction = direction;
         }
 
-
-        /**
-         * メインクラス
-         */
-        public static void main(String[] args) {
-
-            Vehicle vehicle = new Vehicle(args[0]);
-
-            System.out.println(vehicle);
-
-        }
 
 
 }

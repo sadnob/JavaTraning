@@ -1,4 +1,4 @@
-package jpl.ch03.ex02;
+package jpl.ch03.ex03;
 
 public class X {
 	protected int xMask = 0x00ff;
@@ -28,6 +28,10 @@ class Y extends X {
 		fullMask |= yMask;
 		System.out.printf("Yコンストラクタ処理後\n");
 		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+		// 生成の間に値を使用して設定を行う場合は拡張したクラスのコンストラクタの最後に記述する。
+		fullMask = yMask*xMask;
+		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+
 
 	}
 
