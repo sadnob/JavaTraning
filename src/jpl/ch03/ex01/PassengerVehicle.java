@@ -1,58 +1,68 @@
 package jpl.ch03.ex01;
 
-import jpl.ch02.ex18.Vehicle;
-
-
 public class PassengerVehicle extends Vehicle {
 
-        private  final int seat;
-        private int passenger;
+	private final int NUMBER_OF_SEATS;
+	private int passenger;
 
-        PassengerVehicle (int seat) {
-        	super();
-        	this.seat = seat;
-        }
+	public PassengerVehicle(int numberOfSeats) {
+		super();
+		this.NUMBER_OF_SEATS = numberOfSeats;
+	}
 
-        PassengerVehicle (String name, int seat) {
-        	super(name);
-        	this.seat = seat;
-        }
+	public PassengerVehicle(String owner, int numberOfSeats) {
+		super(owner);
+		this.NUMBER_OF_SEATS = numberOfSeats;
+	}
 
-        PassengerVehicle (String name, int seat, int passenger) {
-        	this(name, seat);
-        	this.passenger = passenger;
-        }
+	public PassengerVehicle(String owner, int numberOfSeats, int passenger) {
+		this(owner, numberOfSeats);
+		this.passenger = passenger;
+	}
 
-        /**
-         * メインクラス
-         */
-        public static void main(String[] args) {
+	/**
+	 * 各フィールドをまとめた文字列を返す。
+	 * @Override
+	 */
+	public String toString() {
+		String desc = super.toString() + ",  ";
+		desc += "seat=" + NUMBER_OF_SEATS + "席,  ";
+		desc += "passenger=" + passenger + "人";
+		return desc;
+	}
 
-        	PassengerVehicle vehicleA = new PassengerVehicle(5);
-        	PassengerVehicle vehicleB = new PassengerVehicle("bob", 6);
-        	PassengerVehicle vehicleC = new PassengerVehicle("bob", 8, 4);
+	/** getter：NUMBER_OF_SEATS */
+	public int getNumberObSeats() {
+		return NUMBER_OF_SEATS;
+	}
 
-        	System.out.println(vehicleA);
-            System.out.println("座席数：" + vehicleA.getSeat() + "席" + "  乗員：" + vehicleA.getPassenger() + "人");
-            System.out.println("座席数：" + vehicleB.getSeat() + "席" + "  乗員：" + vehicleB.getPassenger() + "人");
-        	vehicleB.setPassenger(2);
-            System.out.println("座席数：" + vehicleB.getSeat() + "席" + "  乗員：" + vehicleB.getPassenger() + "人");
-            System.out.println("座席数：" + vehicleC.getSeat() + "席" + "  乗員：" + vehicleC.getPassenger() + "人");
+	/** getter：passenger */
+	public int getPassenger() {
+		return passenger;
+	}
 
-        }
+	/** setter：passenger */
+	public void setPassenger(int passenger) {
+		this.passenger = passenger;
+	}
 
-		public int getSeat() {
-			return seat;
-		}
+	/**
+	 * mainクラス
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
 
-		public int getPassenger() {
-			return passenger;
-		}
+		PassengerVehicle vehicleA = new PassengerVehicle(5);
+		PassengerVehicle vehicleB = new PassengerVehicle("bob", 6);
+		PassengerVehicle vehicleC = new PassengerVehicle("bob", 8, 4);
 
-		public void setPassenger(int passenger) {
-			this.passenger = passenger;
-		}
+		System.out.println(vehicleA);
+		System.out.println(vehicleB);
+		vehicleB.setPassenger(2);
+		System.out.println(vehicleB);
+		System.out.println(vehicleC);
 
-
+	}
 
 }

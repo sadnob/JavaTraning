@@ -1,4 +1,4 @@
-package jpl.ch03.ex04;
+package jpl.ch03.ex01;
 
 public class Vehicle implements Cloneable {
 

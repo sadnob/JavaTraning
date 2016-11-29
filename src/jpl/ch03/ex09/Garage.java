@@ -1,36 +1,32 @@
 package jpl.ch03.ex09;
 
 public class Garage implements Cloneable {
-	private int size;
-	private Vehicle[] viecleList = new Vehicle[size];
+
+	private Vehicle[] vehicleList;
 
 	Garage(int size) {
-		this.size = size;
+		vehicleList = new Vehicle[size];
 	}
 
-	/**
-	 * 車庫にVehicleをセットします。
-	 */
+	// ガレージにvehicleをセットします。
 	public void setVehicle(Vehicle vehicle) {
-		for (int i=1; i<size; i++) {
-			if(viecleList[i] ==null) {
-				viecleList[i] = vehicle;
-				break;
+		for (int i=0; i<vehicleList.length; i++) {
+			Object obj = vehicleList[i];
+			if(obj ==null) {
+				vehicleList[i] = vehicle;
+				return;
 			}
 		}
 		System.out.println("車庫がいっぱいです。");
 	}
 
-	/**
-	 * @param id ： 対象のVehicleのID
-	 * @return target : 対象のVehicle
-	 */
+	// ガレージから指定したvehicleを取得します
 	public Vehicle getVehicle(int id) {
 		Vehicle target;
-		for(int i = 1; i<size; i++) {
-			if(viecleList[i].getId() == id) {
-				target = viecleList[i];
-				viecleList[i] = null;
+		for(int i = 1; i<vehicleList.length; i++) {
+			if(vehicleList[i].getId() == id) {
+				target = vehicleList[i];
+				vehicleList[i] = null;
 				return target;
 			}
 		}
@@ -38,21 +34,53 @@ public class Garage implements Cloneable {
 	}
 
 	@Override
-	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
+	public String toString() {
+		String desc = "";
+		for(Vehicle obj : vehicleList) {
+			desc += obj.toString() + " ";
+		}
+		return desc;
+	}
+
+	@Override
+	protected Garage clone() throws CloneNotSupportedException {
+		Garage cloneGarage = (Garage)super.clone();
+		Vehicle[] cloneVehicleList = new Vehicle[vehicleList.length];
+		for (int i = 0; i < cloneVehicleList.length; i++) {
+			cloneVehicleList[i] = vehicleList[i].clone();
+		}
+		cloneGarage.setVehicleList(cloneVehicleList);
+		return cloneGarage;
+	}
+
+	// getter：vehicleList
+	public Vehicle[] getVehicleList() {
+		return vehicleList;
+	}
+	// setter：vehicleList
+	public void setVehicleList(Vehicle[] vehicleList) {
+		this.vehicleList = vehicleList;
 	}
 
 	/**
-	 * テスト用メインメソッド
+	 *  mainメソッド
+	 * @param args
 	 */
 	public static void main(String[] args) {
 
 		Garage garage = new Garage(3);
-		Vehicle vehicleA = new Vehicle();
-		Vehicle vehicleB = new Vehicle();
-		Vehicle vehicleC = new Vehicle();
-		Vehicle vehicleD = new Vehicle();
-
+		Vehicle vehicleA = new Vehicle("father");
+		garage.setVehicle(vehicleA);
+		Vehicle vehicleB = new Vehicle("mother");
+		garage.setVehicle(vehicleB);
+		Vehicle vehicleC = new Vehicle("brother");
+		garage.setVehicle(vehicleC);
+		try {
+			System.out.println(garage);
+			System.out.println(garage.clone());
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }

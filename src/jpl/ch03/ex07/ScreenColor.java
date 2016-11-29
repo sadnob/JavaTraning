@@ -6,9 +6,13 @@ public class ScreenColor {
 	public ScreenColor(Object value) {
 		this.value = value;
 	}
-
+	// getter：value
 	public Object getValue() {
 		return value;
+	}
+	// setter：value
+	public void setValue(Object value) {
+		this.value = value;
 	}
 
 

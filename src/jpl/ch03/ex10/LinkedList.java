@@ -1,67 +1,83 @@
 package jpl.ch03.ex10;
 
 
-public class LinkedList implements Cloneable{
+public class LinkedList implements Cloneable {
 
 	private Object obj;
-	private LinkedList nextLinkedList;
+	private LinkedList nextLink;
+
 
 	LinkedList(Object obj) {
 		this.obj = obj;
 	}
+
 	LinkedList(Object obj, LinkedList linkedList) {
 		this.obj = obj;
-		this.nextLinkedList = linkedList;
+		this.nextLink = linkedList;
 	}
 
-	/**
-	 * 引数で渡されたリスト内の要素の数を得ます。
-	 */
-	public static int getlistCount(LinkedList linkedList) {
-        int count = 0;
 
-		if (linkedList.getNextLinkedList() != null) {
+	public  int getlistCount() {
+		int count = 0;
+
+		if (nextLink != null) {
 			count += 1;
-			count += getlistCount(linkedList.getNextLinkedList());
+			count += nextLink.getlistCount();
 		}
 		return count;
 	}
+
 	public String toString() {
 		String desc = obj.toString();
-		if (nextLinkedList != null) {
-			desc += ", nextLinkedObj： " + nextLinkedList.toString();
+		if (nextLink != null) {
+			desc += ", " + nextLink.toString();
 		}
 		return desc;
 	}
-	/**
-	 * オブジェクを取得します。
-	 */
+
+	// getter：obj
 	public Object getObj() {
 		return obj;
 	}
-	/**
-	 * オブジェクトを設定します。
-	 */
+	// setter：obj
 	public void setObj(Object obj) {
 		this.obj = obj;
 	}
-	/**
-	 * 次の要素を取得します。
-	 */
-	public LinkedList getNextLinkedList() {
-		return nextLinkedList;
+	// getter：nextLink
+	public LinkedList getNextLink() {
+		return nextLink;
 	}
-	/**
-	 * 次の要素を設定します。
-	 */
-	public void setNextLinkedList(LinkedList nextLinkedList) {
-		this.nextLinkedList = nextLinkedList;
+	// setter：nextLink
+	public void setNextLink(LinkedList nextLink) {
+		this.nextLink = nextLink;
 	}
+
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		
-		return super.clone();
+		LinkedList cloneList = (LinkedList) super.clone();
+		cloneList.setObj(getObj());
+		cloneList.setNextLink(getNextLink());
+		return cloneList;
 	}
-	
+
+	// mainメソッド
+	public static void main(String[] args) {
+
+		LinkedList linkedListA = new LinkedList("ObjectA");
+		LinkedList linkedListB = new LinkedList("ObjectB");
+		LinkedList linkedListC = new LinkedList("ObjectC");
+
+		linkedListA.setNextLink(linkedListB);
+		linkedListB.setNextLink(linkedListC);
+
+		System.out.println(linkedListA);
+		try {
+			System.out.println(linkedListA.clone());
+			System.out.println(linkedListB.clone());
+			System.out.println(linkedListC.clone());
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

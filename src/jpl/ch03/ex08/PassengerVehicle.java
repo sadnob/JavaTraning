@@ -1,68 +1,76 @@
 package jpl.ch03.ex08;
 
-import jpl.ch02.ex18.Vehicle;
+public class PassengerVehicle extends Vehicle implements Cloneable {
 
-public class PassengerVehicle extends Vehicle implements Cloneable{
+	private final int NUMBER_OF_SEATS;
+	private int passenger;
 
-        private  final int seat;
-        private int passenger;
+	public PassengerVehicle(int numberOfSeats) {
+		super();
+		this.NUMBER_OF_SEATS = numberOfSeats;
+	}
 
-        PassengerVehicle (int seat) {
-        	super();
-        	this.seat = seat;
-        }
+	public PassengerVehicle(String owner, int numberOfSeats) {
+		super(owner);
+		this.NUMBER_OF_SEATS = numberOfSeats;
+	}
 
-        PassengerVehicle (String name, int seat) {
-        	super(name);
-        	this.seat = seat;
-        }
+	public PassengerVehicle(String owner, int numberOfSeats, int passenger) {
+		this(owner, numberOfSeats);
+		this.passenger = passenger;
+	}
 
-        PassengerVehicle (String name, int seat, int passenger) {
-        	this(name, seat);
-        	this.passenger = passenger;
-        }
+	@Override
+	public String toString() {
+		String desc = super.toString() + ",  ";
+		desc += "seat=" + NUMBER_OF_SEATS + "席,  ";
+		desc += "passenger=" +passenger + "人";
+		return desc;
+	}
 
-        /**
-         * 座席数を取得するゲッター
-         */
-		public int getSeat() {
-			return seat;
+	@Override
+	protected PassengerVehicle clone() throws CloneNotSupportedException {
+		return (PassengerVehicle) super.clone();
+	}
+
+	// getter：NUMBER_OF_SEATS
+	public int getNumberObSeats() {
+		return NUMBER_OF_SEATS;
+	}
+
+	// getter：passenger
+	public int getPassenger() {
+		return passenger;
+	}
+
+	// setter：passenger
+	public void setPassenger(int passenger) {
+		this.passenger = passenger;
+	}
+
+	/**
+	 * mainメソッド
+	 *
+	 * @param aargs
+	 */
+	public static void main(String[] args) {
+
+		PassengerVehicle pVehicleA = new PassengerVehicle(5);
+		PassengerVehicle pVehicleB = new PassengerVehicle("bob", 6);
+		PassengerVehicle pVehicleC = new PassengerVehicle("bob", 8, 4);
+
+		System.out.println(pVehicleA);
+		System.out.println(pVehicleB);
+		pVehicleB.setPassenger(2);
+		System.out.println(pVehicleB);
+		try {
+			PassengerVehicle cloneObj = pVehicleC.clone();
+			System.out.println(pVehicleC);
+			System.out.println(cloneObj);
+		} catch (CloneNotSupportedException e) {
+			e.printStackTrace();
 		}
-        /**
-         * 乗員の数を取得するゲッター
-         */
-		public int getPassenger() {
-			return passenger;
-		}
-	      /**
-         * 乗員の数を設定するセッター
-         */
-		public void setPassenger(int passenger) {
-			this.passenger = passenger;
-		}
 
-        @Override
-		protected PassengerVehicle clone() throws CloneNotSupportedException {
-
-			return (PassengerVehicle) super.clone();
-		}
-
-		/**
-         * メインメソッド
-         */
-        public static void main(String[] args) {
-
-        	PassengerVehicle vehicleA = new PassengerVehicle(5);
-        	PassengerVehicle vehicleB = new PassengerVehicle("bob", 6);
-        	PassengerVehicle vehicleC = new PassengerVehicle("bob", 8, 4);
-
-        	System.out.println(vehicleA);
-            System.out.println("座席数：" + vehicleA.getSeat() + "席" + "  乗員：" + vehicleA.getPassenger() + "人");
-            System.out.println("座席数：" + vehicleB.getSeat() + "席" + "  乗員：" + vehicleB.getPassenger() + "人");
-        	vehicleB.setPassenger(2);
-            System.out.println("座席数：" + vehicleB.getSeat() + "席" + "  乗員：" + vehicleB.getPassenger() + "人");
-            System.out.println("座席数：" + vehicleC.getSeat() + "席" + "  乗員：" + vehicleC.getPassenger() + "人");
-
-        }
+	}
 
 }

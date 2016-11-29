@@ -47,10 +47,23 @@ public class ColorAttr extends Attr {
 	}
 
 	@Override
-	/** 同じScreenColorオブジェクトを持っている場合　true*/
+	/**
+	 *  引数がColorAttrインスタンスでない場合 ⇒ false
+	 *  引数のnameがカレントオブジェクトのnameと異なる場合 ⇒ false
+	 *  引数のvalue.toString()がカレントオブジェクトのvalue.toString()と異なる場合 ⇒ false
+	 */
 	public boolean equals(Object obj) {
-		ColorAttr otherObj = (ColorAttr)obj;
-		return this.myColor.equals(otherObj.getColor());
+		if (!(obj instanceof ColorAttr)) {
+			return false;
+		}
+		ColorAttr colorAttr = (ColorAttr) obj;
+		if (!this.getName().equals(colorAttr.getName())) {
+			return false;
+		}
+		if (!this.getValue().toString().equals(colorAttr.getValue().toString())) {
+			return false;
+		}
+		return true;
 	}
 	@Override
 	public int hashCode() {
