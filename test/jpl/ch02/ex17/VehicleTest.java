@@ -9,24 +9,22 @@ public class VehicleTest {
 
 	@Test
 	public void testTurnDouble() {
-		Vehicle testVehicle = new Vehicle();
-		testVehicle.setDirection(30);
-		testVehicle.turn(20);
-		assertThat(testVehicle.getDirection(), is(50.0));
-		testVehicle.turn(-60);
-		assertThat(testVehicle.getDirection(), is(-10.0));
+		Vehicle vehicleA = new Vehicle();
+		vehicleA.setDirection(20.0);
+		assertThat(vehicleA.getDirection(), is(20.0));
+		vehicleA.turn(-60);
+		assertThat(vehicleA.getDirection(), is(-40.0));
+		System.out.println(vehicleA);
 	}
 
 	@Test
 	public void testTurn() {
-		Vehicle testVehicle = new Vehicle();
-		testVehicle.setDirection(30);
-		testVehicle.turn("TURN_RIGHT");
-		assertThat(testVehicle.getDirection(), is(120.0));
-		testVehicle.turn("TURN_LEFT");
-		assertThat(testVehicle.getDirection(), is(30.0));
-		testVehicle.turn("turn_right");
-		assertThat(testVehicle.getDirection(), is(30.0));
+		Vehicle vehicleA = new Vehicle();
+		vehicleA.turn("TURN_RIGHT");
+		assertThat(vehicleA.getDirection(), is(90.0));
+		Vehicle vehicleB = new Vehicle();
+		vehicleB.turn("TURN_LEFT");
+		assertThat(vehicleB.getDirection(), is(-90.0));
 	}
 
 }

@@ -10,7 +10,7 @@ public class Vehicle implements Cloneable {
 	public static final String TURN_LEFT = "TURN_LEFT";
 	public static final String TURN_RIGHT = "TURN_RIGHT";
 
-	protected Vehicle() {
+	public Vehicle() {
 		this.Id = nextId++;
 	}
 

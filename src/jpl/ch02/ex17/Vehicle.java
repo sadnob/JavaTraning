@@ -2,98 +2,117 @@ package jpl.ch02.ex17;
 
 public class Vehicle {
 
-        private final long Id;
-        private String owner;
-        private double speed;
-        private double direction;
-        public static final String TURN_LEFT = "TURN_LEFT";
-        public static final String TURN_RIGHT = "TURN_RIGHT";
+	private final long Id;
+	private String owner;
+	private double speed;
+	private double direction;
+	public static final String TURN_LEFT = "TURN_LEFT";
+	public static final String TURN_RIGHT = "TURN_RIGHT";
 
-        private static long nextId = 0;
+	private static long nextId = 1;
 
-        Vehicle () {
-                this.Id = nextId++;
-        }
+	protected Vehicle() {
+		this.Id = nextId++;
+	}
 
-        Vehicle (String name) {
-                this();
-                this.owner = name;
-        }
+	protected Vehicle(String owner) {
+		this();
+		this.owner = owner;
+	}
 
-        /**
-         * 現在使われている識別番号の最大値を得ます。
-         */
-        static double getMaxId() {
-                return nextId-1;
-        }
+	/** vehicleインスタンスの最大IDを得ます。 */
+	static double getMaxId() {
+		return nextId - 1;
+	}
 
-        /**
-         *現在のスピードを渡された値に変更する。
-         */
-        public void changeSpeed(double speed) {
-                setSpeed(speed);
-        }
+	/** 変速 */
+	public void changeSpeed(double speed) {
+		this.speed = speed;
+	}
 
-        /**
-         *渡された角度だけ回転します。
-         */
-        public void turn(double direction) {
-    this.speed += direction;
-        }
-        /**
-         *右又は左に90度回転します。
-         */
-        public void turn(String direction) {
-            if (direction.equals(TURN_LEFT)) {
-            this.direction -= 90;
-            } else if (direction.equals(TURN_RIGHT)) {
-            this.direction += 90;
-            }
-        }
+	/** 停止 */
+	public void stop() {
+		this.speed = 0.0;
+	}
 
-        public String toString() {
-                return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
-        }
+	/** 旋回
+	 * @param double direction：曲がる角度*/
+	public void turn(double direction) {
+		this.direction += direction;
+	}
 
-        public double getId() {
-                return Id;
-        }
+	/** 旋回
+	 * @param  String direction ：’TURN_LEFT’ or 'TURN_RIGHT'*/
+	public void turn(String direction) {
+		if (direction.equals(TURN_LEFT)) {
+			this.direction -= 90;
+		} else if (direction.equals(TURN_RIGHT)) {
+			this.direction += 90;
+		}
+	}
 
-        public double getNextId() {
-                return nextId;
-        }
+	/**
+	 * 各フィールドをまとめた文字列を返します。
+	 * @Override
+	 */
+	public String toString() {
+		String desc = "VehicleID:" + Id + "  ";
+		desc += "owner=" + owner + ",  ";
+		desc += "speed=" + speed + "km/h,  direction=" + direction;
+		return desc;
+	}
 
-        public String getOwner() {
-                return owner;
-        }
+	/** getter：ID */
+	public double getId() {
+		return Id;
+	}
 
-        public double getSpeed() {
-                return speed;
-        }
+	/** getter：nextId */
+	public final double getNextId() {
+		return nextId;
+	}
 
-        public double getDirection() {
-                return direction;
-        }
+	/** getter：owner */
+	public String getOwner() {
+		return owner;
+	}
 
-        /**
-         * 所有者を設定するセッターメソッド
-         */
-        public void setOwner(String owner) {
-                this.owner = owner;
-        }
-        /**
-         * スピードを設定するセッターメソッド
-         */
-        public void setSpeed(double speed) {
-                this.speed = speed;
-        }
-        /**
-         * 方向を設定するセッターメソッド
-         */
-        public void setDirection(double direction) {
-                this.direction = direction;
-        }
+	/** getter：speed */
+	public double getSpeed() {
+		return speed;
+	}
 
+	/** getter：direction */
+	public double getDirection() {
+		return direction;
+	}
 
+	/** setter：owner */
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 
+	/** setter：speed */
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	/** setter：direction */
+	public void setDirection(double direction) {
+		this.direction = direction;
+	}
+
+	/**
+	 * mainメソッド
+	 *
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		Vehicle vehicle = new Vehicle(args[0]);
+		System.out.println(vehicle);
+		vehicle.turn(TURN_RIGHT);
+		System.out.println(vehicle);
+		vehicle.turn(TURN_LEFT);
+		System.out.println(vehicle);
+	}
 }

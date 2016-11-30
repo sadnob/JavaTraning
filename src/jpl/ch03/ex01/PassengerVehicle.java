@@ -26,8 +26,8 @@ public class PassengerVehicle extends Vehicle {
 	 */
 	public String toString() {
 		String desc = super.toString() + ",  ";
-		desc += "seat=" + NUMBER_OF_SEATS + "席,  ";
-		desc += "passenger=" + passenger + "人";
+		desc += "seats=" + NUMBER_OF_SEATS + ",  ";
+		desc += "passenger=" + passenger;
 		return desc;
 	}
 

@@ -15,7 +15,7 @@ public class LinkedList {
 	public String toString() {
 		String desc = obj.toString();
 		if (nextLinkedList != null) {
-			desc += ", nextLinkedObj： " + nextLinkedList.toString();
+			desc += ", nextLinkedObj＝" + nextLinkedList.toString();
 		}
 		return desc;
 	}

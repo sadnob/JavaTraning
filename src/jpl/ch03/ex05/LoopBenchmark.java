@@ -2,7 +2,7 @@ package jpl.ch03.ex05;
 
 public class LoopBenchmark extends Benchmark {
 
-	public int loopNum;
+	public int loopNum; // ループさせる回数
 
 	public LoopBenchmark (int loopNum) {
 		this.loopNum = loopNum;

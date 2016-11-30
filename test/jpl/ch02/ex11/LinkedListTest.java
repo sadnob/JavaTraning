@@ -26,7 +26,7 @@ public class LinkedListTest {
 		linkedListA.nextLinkedList = linkedListB;
 		linkedListB.nextLinkedList = linkedListC;
 
-		String answer = objA.toString() + ", nextLinkedObj＝" + objB.toString() + ", nextLinkedObj＝" + objC.toString();
+		String answer = objA + ", nextLinkedObj＝" + objB + ", nextLinkedObj＝" + objC;
 
 		assertThat(linkedListA.toString(), is(answer));
 	}

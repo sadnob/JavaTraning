@@ -15,12 +15,12 @@ public class LinkedListTest {
 		LinkedList lListA = new LinkedList(objA);
 		LinkedList lListB = new LinkedList(objB);
 		LinkedList lListC = new LinkedList(objC);
-		lListA.setNextLinkedList(lListB);
-		lListB.setNextLinkedList(lListC);
+		lListA.setNextLink(lListB);
+		lListB.setNextLink(lListC);
 
-		assertThat(LinkedList.getlistCount(lListC),is(0));
-		assertThat(LinkedList.getlistCount(lListB),is(1));
-		assertThat(LinkedList.getlistCount(lListA),is(2));
+		assertThat(lListA.getlistCount(),is(2));
+		assertThat(lListB.getlistCount(),is(1));
+		assertThat(lListC.getlistCount(),is(0));
 	}
 
 }

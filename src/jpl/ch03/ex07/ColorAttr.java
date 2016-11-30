@@ -46,11 +46,11 @@ public class ColorAttr extends Attr {
 			myColor = new ScreenColor(getValue());
 	}
 
-	@Override
 	/**
 	 *  引数がColorAttrインスタンスでない場合 ⇒ false
 	 *  引数のnameがカレントオブジェクトのnameと異なる場合 ⇒ false
 	 *  引数のvalue.toString()がカレントオブジェクトのvalue.toString()と異なる場合 ⇒ false
+	 *  @Override
 	 */
 	public boolean equals(Object obj) {
 		if (!(obj instanceof ColorAttr)) {
@@ -67,8 +67,12 @@ public class ColorAttr extends Attr {
 	}
 	@Override
 	public int hashCode() {
+		int result = 17;
+		result *= 31;
+		result += getName().hashCode();
+		result += getValue().toString().hashCode();
 
-		return super.hashCode();
+		return result;
 	}
 
 }

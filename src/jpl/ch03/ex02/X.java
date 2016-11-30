@@ -4,12 +4,15 @@ public class X {
 	protected int xMask = 0x00ff;
 	protected int fullMask;
 
+	{
+		System.out.printf("X初期化ブロック\n");
+		System.out.printf("xMask：%x, fullMask：%x\n", xMask, fullMask);
+	}
+
 	public X() {
-		System.out.printf("Xコンストラクタ処理前\n");
-		System.out.printf("xMask：%x, fullMask：%x\n",xMask,fullMask);
+		System.out.printf("Xクラスコンストラクタ\n");
 		fullMask = xMask;
-		System.out.printf("Xコンストラクタ処理後\n");
-		System.out.printf("xMask：%x, fullMask：%x\n",xMask,fullMask);
+		System.out.printf("xMask：%x, fullMask：%x\n", xMask, fullMask);
 
 	}
 
@@ -18,17 +21,4 @@ public class X {
 	}
 }
 
-class Y extends X {
 
-	protected int yMask = 0xff00;
-
-	public Y() {
-		System.out.printf("Yコンストラクタ処理前\n");
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
-		fullMask |= yMask;
-		System.out.printf("Yコンストラクタ処理後\n");
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
-
-	}
-
-}

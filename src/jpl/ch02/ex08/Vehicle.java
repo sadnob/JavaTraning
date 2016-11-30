@@ -8,7 +8,7 @@ public class Vehicle {
 	public double speed;
 	public double direction;
 
-	public static long nextId = 0;
+	public static long nextId = 1;
 
 	Vehicle () {
 		this.Id = nextId++;

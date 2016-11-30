@@ -7,21 +7,22 @@ import org.junit.Test;
 
 public class VehicleTest {
 
-	double before = 60.0;
-	double after = 20.0;
+	double testSpeedA = 60.0;
+	double testSpeedB = -20.0;
 
 	@Test
 	public void testChangeSpeed() {
 		Vehicle testVehicle = new Vehicle();
-		testVehicle.setSpeed(before);
-		testVehicle.changeSpeed(after);
-		assertThat(testVehicle.getSpeed(), is(after));
+		testVehicle.changeSpeed(testSpeedA);
+		assertThat(testVehicle.getSpeed(), is(testSpeedA));
+		testVehicle.changeSpeed(testSpeedB);
+		assertThat(testVehicle.getSpeed(), is(testSpeedB));
 	}
 
 	@Test
 	public void testStop() {
 		Vehicle testVehicle = new Vehicle();
-		testVehicle.setSpeed(before);
+		testVehicle.setSpeed(testSpeedA);
 		testVehicle.stop();
 		assertThat(testVehicle.getSpeed(), is(0.0));
 	}

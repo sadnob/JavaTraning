@@ -16,10 +16,12 @@ public class LinkedList implements Cloneable {
 		this.nextLink = linkedList;
 	}
 
-
+	/**
+	 * リスト内の要素の数を返します。
+	 * @return int count：リストの要素の数
+	 */
 	public  int getlistCount() {
 		int count = 0;
-
 		if (nextLink != null) {
 			count += 1;
 			count += nextLink.getlistCount();
@@ -27,6 +29,10 @@ public class LinkedList implements Cloneable {
 		return count;
 	}
 
+	/**
+	 * リストの要素をすべて表示すします。
+	 * @return String desc
+	 */
 	public String toString() {
 		String desc = obj.toString();
 		if (nextLink != null) {
@@ -35,19 +41,19 @@ public class LinkedList implements Cloneable {
 		return desc;
 	}
 
-	// getter：obj
+	/** getter：obj */
 	public Object getObj() {
 		return obj;
 	}
-	// setter：obj
+	/** setter：obj */
 	public void setObj(Object obj) {
 		this.obj = obj;
 	}
-	// getter：nextLink
+	/** getter：nextLink */
 	public LinkedList getNextLink() {
 		return nextLink;
 	}
-	// setter：nextLink
+	/** setter：nextLink */
 	public void setNextLink(LinkedList nextLink) {
 		this.nextLink = nextLink;
 	}

@@ -7,13 +7,13 @@ public class Vehicle {
 	public double speed;
 	public double direction;
 
-	public static long nextId = 0;
+	public static long nextId = 1;
 
-	Vehicle () {
+	public Vehicle () {
 		this.Id = nextId++;
 	}
 
-	Vehicle (String name) {
+	public Vehicle (String name) {
 		this();
 		this.owner = name;
 	}
@@ -26,7 +26,7 @@ public class Vehicle {
 	}
 
 	public String toString() {
-		return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
+		return "[ID : "+ Id + " Owner : " + owner + "] [Speed = " + speed + " Direction = " + direction + "]";
 	}
 
 }
