@@ -1,6 +1,6 @@
 package jpl.ch01.ex03;
 
-public class FibonacciAddTitle {
+public class Fibonacci {
 
 	public static void main(String[] args) {
             int lo = 1;

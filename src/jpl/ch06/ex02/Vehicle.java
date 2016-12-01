@@ -1,9 +1,8 @@
 package jpl.ch06.ex02;
 
 /**
- * Q6-4
- * 元のメソッドの場合、引数の型がString型であったためString型であれば何でも渡すことができてしまった。
- * 今回、引数の型がenum定数のため引数に渡されるのがenum宣言された定数のみに絞ることができる。
+ * Q6-2
+ * 渡される引数がenum宣言された定数のみに絞ることができる。
  */
 enum Turn{
 	TURN_LEFT,
@@ -28,35 +27,28 @@ public class Vehicle {
                 this.owner = name;
         }
 
-        /**
-         * 現在使われている識別番号の最大値を得ます。
-         */
-        static double getMaxId() {
-                return nextId-1;
-        }
+    	/** vehicleインスタンスの最大IDを得ます。 */
+    	static double getMaxId() {
+    		return nextId - 1;
+    	}
 
-        /**
-         *現在のスピードを渡された値に変更する。
-         */
-        public void changeSpeed(double speed) {
-                setSpeed(speed);
-        }
-        /**
-         * スピードを停止する。
-         */
-        public void stop() {
-        	this.speed = 0.0;
-        }
+    	/** 変速 */
+    	public void changeSpeed(double speed) {
+    		this.speed = speed;
+    	}
 
-        /**
-         *渡された角度だけ回転します。
-         */
-        public void turn(double direction) {
-    this.direction += direction;
-        }
-        /**
-         *右又は左に90度回転します。
-         */
+    	/** 停止 */
+    	public void stop() {
+    		this.speed = 0.0;
+    	}
+
+    	/** 旋回 */
+    	public void turn(double direction) {
+    		this.direction += direction;
+    	}
+
+        /**右又は左に90度旋回
+         * @param　direction　TURN*/
         public void turn(Turn direction) {
 
             if (direction == Turn.TURN_LEFT) {
@@ -65,40 +57,49 @@ public class Vehicle {
             this.direction += 90;
             }
         }
-        public String toString() {
-                return "[ID = "+ Id + "  Owner =" + owner + " ] [Speed = " + speed + "direction = " + direction + " ]";
-        }
+    	/**
+    	 * 各フィールドをまとめた文字列を返します。
+    	 * @Override
+    	 */
+    	public String toString() {
+    		String desc = "VehicleID:" + Id +"  ";
+    		desc +=  "owner=" + owner +",  ";
+    		desc += "speed=" + speed + "km/h,  direction=" + direction;
+    		return  desc;
+    	}
 
-        public double getId() {
-                return Id;
-        }
+    	/** getter：ID */
+    	public double getId() {
+    		return Id;
+    	}
+    	/** getter：nextId */
+    	public final double getNextId() {
+    		return nextId;
+    	}
+    	/** getter：owner */
+    	public String getOwner() {
+    		return owner;
+    	}
+    	/** getter：speed */
+    	public double getSpeed() {
+    		return speed;
+    	}
+    	/** getter：direction */
+    	public double getDirection() {
+    		return direction;
+    	}
+    	/** setter：owner */
+    	public void setOwner(String owner) {
+    		this.owner = owner;
+    	}
+    	/** setter：speed */
+    	public void setSpeed(double speed) {
+    		this.speed = speed;
+    	}
+    	/** setter：direction */
+    	public void setDirection(double direction) {
+    		this.direction = direction;
+    	}
 
-        public double getNextId() {
-                return nextId;
-        }
-
-        public String getOwner() {
-                return owner;
-        }
-
-        public double getSpeed() {
-                return speed;
-        }
-
-        public double getDirection() {
-                return direction;
-        }
-
-        public void setOwner(String owner) {
-                this.owner = owner;
-        }
-
-        public void setSpeed(double speed) {
-                this.speed = speed;
-        }
-
-        public void setDirection(double direction) {
-                this.direction = direction;
-        }
 
 }

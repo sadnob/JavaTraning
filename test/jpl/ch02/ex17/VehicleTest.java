@@ -14,7 +14,6 @@ public class VehicleTest {
 		assertThat(vehicleA.getDirection(), is(20.0));
 		vehicleA.turn(-60);
 		assertThat(vehicleA.getDirection(), is(-40.0));
-		System.out.println(vehicleA);
 	}
 
 	@Test
@@ -25,6 +24,9 @@ public class VehicleTest {
 		Vehicle vehicleB = new Vehicle();
 		vehicleB.turn("TURN_LEFT");
 		assertThat(vehicleB.getDirection(), is(-90.0));
+		vehicleA.turn("");
+		assertThat(vehicleA.getDirection(), is(90.0));
+
 	}
 
 }

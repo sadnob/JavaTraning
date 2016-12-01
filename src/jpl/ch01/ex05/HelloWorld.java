@@ -1,6 +1,6 @@
 package jpl.ch01.ex05;
 
-public class StringConstant {
+public class HelloWorld {
 
 	private static final String displayMoji = "Hello,World";
 

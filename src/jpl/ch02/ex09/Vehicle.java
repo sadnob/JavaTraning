@@ -13,9 +13,9 @@ public class Vehicle {
 		this.Id = nextId++;
 	}
 
-	Vehicle (String name) {
+	Vehicle (String owner) {
 		this();
-		this.owner = name;
+		this.owner = owner;
 	}
 
 	/**

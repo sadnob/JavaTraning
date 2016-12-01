@@ -12,7 +12,6 @@ public class VehicleTest {
 		Vehicle vehicle = new Vehicle();
 		assertThat(vehicle.getId(), is(1L));
 		assertThat(vehicle.getNextId(), is(2L));
-
 	}
 
 	@Test
@@ -21,6 +20,8 @@ public class VehicleTest {
 		String owner = "Bob";
 		vehicle.setOwner(owner);
 		assertThat(vehicle.getOwner(), is(owner));
+		vehicle.setOwner(null);
+		assertNull(vehicle.getOwner());
 	}
 
 	@Test

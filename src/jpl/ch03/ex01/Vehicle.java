@@ -40,12 +40,12 @@ public class Vehicle implements Cloneable {
 		this.speed = 0.0;
 	}
 
-	/** 右旋回 */
+	/** 旋回 */
 	public void turn(double direction) {
-		this.speed += direction;
+		this.direction += direction;
 	}
 
-	/** 左旋回 */
+	/** 右または左へ90度旋回 */
 	public void turn(String direction) {
 		if (direction.equals(TURN_LEFT)) {
 			this.direction -= 90;

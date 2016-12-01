@@ -2,7 +2,6 @@ package jpl.ch02.ex11;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
-import jpl.ch02.ex10.Vehicle;
 
 import org.junit.Test;
 
@@ -10,25 +9,28 @@ public class LinkedListTest {
 
 	@Test
 	public void testToString() {
-		Vehicle objA = new Vehicle("A");
-		objA.direction = 10;
-		objA.speed = 30;
-		Vehicle objB = new Vehicle("B");
-		objB.direction = 20;
-		objB.speed = 60;
-		Vehicle objC = new Vehicle("C");
-		objC.direction = 30;
-		objC.speed = 90;
+		Object valueA = "A";
+		Object valueB = "B";
+		Object valueC = "C";
 
-		LinkedList linkedListA = new LinkedList(objA);
-		LinkedList linkedListB = new LinkedList(objB);
-		LinkedList linkedListC = new LinkedList(objC);
-		linkedListA.nextLinkedList = linkedListB;
-		linkedListB.nextLinkedList = linkedListC;
+		LinkedList linkedListA = new LinkedList(valueA);
+		LinkedList linkedListB = new LinkedList(valueB);
+		LinkedList linkedListC = new LinkedList(valueC);
+		linkedListA.nextLink = linkedListB;
+		linkedListB.nextLink = linkedListC;
 
-		String answer = objA + ", nextLinkedObj＝" + objB + ", nextLinkedObj＝" + objC;
-
-		assertThat(linkedListA.toString(), is(answer));
+		String answer1 = valueA + ", " + valueB + ", " + valueC;
+		assertThat(linkedListA.toString(), is(answer1));
 	}
+
+	@Test(expected = NullPointerException.class)
+    public void testSetAge1() {
+		Object valueA = "A";
+		Object valueB = null;
+		LinkedList linkedListA = new LinkedList(valueA);
+		LinkedList linkedListB = new LinkedList(valueB);
+		linkedListA.nextLink = linkedListB;
+		System.out.println(linkedListA.toString());
+    }
 
 }

@@ -12,24 +12,24 @@ public class Vehicle {
 
 	public static void main(String[] args) {
 
-		Vehicle firstVehicle = new Vehicle();
-		firstVehicle.owner = "太郎";
-		firstVehicle.speed = 50;
-		firstVehicle.direction = 30;
+		Vehicle VehicleA = new Vehicle();
+		VehicleA.owner = "A";
+		VehicleA.speed = 50;
+		VehicleA.direction = 30;
 
-		Vehicle secondVehicle = new Vehicle();
-		secondVehicle.owner = "二郎";
-		secondVehicle.speed = 65;
-		secondVehicle.direction = 60;
+		Vehicle VehicleB = new Vehicle();
+		VehicleB.owner = "B";
+		VehicleB.speed = 65;
+		VehicleB.direction = 60;
 
-		Vehicle thirdVehicle = new Vehicle();
-		thirdVehicle.owner = "三郎";
-		thirdVehicle.speed = 80;
-		thirdVehicle.direction = 90;
+		Vehicle VehicleC = new Vehicle();
+		VehicleC.owner = "C";
+		VehicleC.speed = 80;
+		VehicleC.direction = 90;
 
-		System.out.println("[持ち主]：" + firstVehicle.owner + "  [現在のスピード]：" + firstVehicle.speed + "キロ" + "  [現在の方向]：" + firstVehicle.direction +"°");
-		System.out.println("[持ち主]：" + secondVehicle.owner + "  [現在のスピード]：" + secondVehicle.speed + "キロ" +  "  [現在の方向]：" + secondVehicle.direction +"°");
-		System.out.println("[持ち主]：" + thirdVehicle.owner + "  [現在のスピード]：" + thirdVehicle.speed + "キロ" +  "  [現在の方向]：" + thirdVehicle.direction +"°");
+		System.out.println("[持ち主]：" + VehicleA.owner + "  [現在のスピード]：" + VehicleA.speed + "キロ" + "  [現在の方向]：" + VehicleA.direction +"°");
+		System.out.println("[持ち主]：" + VehicleB.owner + "  [現在のスピード]：" + VehicleB.speed + "キロ" +  "  [現在の方向]：" + VehicleB.direction +"°");
+		System.out.println("[持ち主]：" + VehicleC.owner + "  [現在のスピード]：" + VehicleC.speed + "キロ" +  "  [現在の方向]：" + VehicleC.direction +"°");
 
 	}
 

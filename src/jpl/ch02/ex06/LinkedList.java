@@ -1,28 +1,30 @@
 package jpl.ch02.ex06;
 
+
 public class LinkedList {
 
-	public Object obj;
-	public LinkedList nextLinkedList;
+	public Object value;
+	public LinkedList nextLink;
 
 	public static void main(String[] args) {
 
-		Vehicle firstVehicle = new Vehicle();
-		Vehicle secondVehicle = new Vehicle();
-		Vehicle thirdVehicle = new Vehicle();
-
+		Object valueA = "A";
+		Object valueB = "B";
+		Object valueC = "C";
 
 		LinkedList linkedListA = new LinkedList();
-		linkedListA.obj =firstVehicle;
+		linkedListA.value =valueA;
 		LinkedList linkedListB = new LinkedList();
-		linkedListB.obj = secondVehicle;
+		linkedListB.value = valueB;
 		LinkedList linkedListC = new LinkedList();
-		linkedListC.obj = thirdVehicle;
+		linkedListC.value = valueC;
 
-		linkedListA.nextLinkedList = linkedListB;
-		linkedListB.nextLinkedList = linkedListC;
+		linkedListA.nextLink = linkedListB;
+		linkedListB.nextLink = linkedListC;
 
-
+		System.out.println( linkedListA.value +"  次の要素："+ linkedListA.nextLink.value);
+		System.out.println( linkedListB.value +"  次の要素："+ linkedListB.nextLink.value);
+		System.out.println( linkedListC.value +"  次の要素："+ linkedListC.nextLink);
 
 
 	}

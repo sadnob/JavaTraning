@@ -13,9 +13,9 @@ public class Vehicle {
 		this.Id = nextId++;
 	}
 
-	public Vehicle (String name) {
+	public Vehicle (String owner) {
 		this();
-		this.owner = name;
+		this.owner = owner;
 	}
 
 	/**
@@ -25,8 +25,15 @@ public class Vehicle {
 		return nextId-1;
 	}
 
+	/**
+	 * 各フィールドをまとめた文字列を返します。
+	 * @Override
+	 */
 	public String toString() {
-		return "[ID : "+ Id + " Owner : " + owner + "] [Speed = " + speed + " Direction = " + direction + "]";
+		String desc = "VehicleID:" + Id + "  ";
+		desc += "owner=" + owner + ",  ";
+		desc += "speed=" + speed + "km/h,  direction=" + direction;
+		return desc;
 	}
 
 }

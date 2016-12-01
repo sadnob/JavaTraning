@@ -2,17 +2,30 @@ package jpl.ch06.ex05;
 
 import java.awt.Color;
 
+//******************************************************************
+//Q6-5
+//A. 定数固有の振る舞いでないため推奨しません。
+//******************************************************************
 enum TraficLight {
-	RED(Color.red) { public Color getColor(){return this.color;}},
-	BLUE(Color.blue) { public Color getColor(){return this.color;}},
-	YELLOW(Color.yellow) { public Color getColor(){return this.color;}};
-
-	Color color;
-	TraficLight(Color color) {this.color = color;}
+	RED() {
+		public Color getColor() {
+			return Color.red;
+		}
+	},
+	BLUE() {
+		public Color getColor() {
+			return Color.blue;
+		}
+	},
+	YELLOW() {
+		public Color getColor() {
+			return Color.yellow;
+		}
+	};
 
 	/**
 	 * Colorオブジェクトを返します
 	 */
-	abstract public  Color getColor();
+	abstract public Color getColor();
 
 }

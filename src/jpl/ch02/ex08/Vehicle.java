@@ -14,22 +14,22 @@ public class Vehicle {
 		this.Id = nextId++;
 	}
 
-	Vehicle (String name) {
+	Vehicle (String owner) {
 		this();
-		this.owner = name;
+		this.owner = owner;
 	}
 
 	public static void main(String[] args) {
 
-	Vehicle firstVehicle = new Vehicle("太郎");
+	Vehicle firstVehicle = new Vehicle("A");
 	firstVehicle.speed = 50;
 	firstVehicle.direction = 30;
 
-	Vehicle secondVehicle = new Vehicle("二郎");
+	Vehicle secondVehicle = new Vehicle("B");
 	secondVehicle.speed = 65;
 	secondVehicle.direction = 60;
 
-	Vehicle thirdVehicle = new Vehicle("三郎");
+	Vehicle thirdVehicle = new Vehicle("C");
 	thirdVehicle.speed = 80;
 	thirdVehicle.direction = 90;
 

@@ -1,6 +1,6 @@
 package jpl.ch01.ex06;
 
-public class FibonacciAddConstantTitle {
+public class Fibonacci {
 
 	static final int MAX = 50;
 	static final String TITLE = "◆フィボナッチ数列◆";

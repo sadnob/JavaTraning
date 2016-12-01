@@ -7,7 +7,7 @@ enum TraficLight {
 	BLUE(Color.blue),
 	YELLOW(Color.yellow);
 
-	Color color;
+	private Color color;
 	TraficLight(Color color) {this.color = color;}
 
 	/**

@@ -1,21 +1,27 @@
 package jpl.ch02.ex11;
 
 public class LinkedList {
-	public Object obj;
-	public LinkedList nextLinkedList;
+	public Object value;
+	public LinkedList nextLink;
 
-	LinkedList(Object obj) {
-		this.obj = obj;
-	}
-	LinkedList(Object obj, LinkedList linkedList) {
-		this.obj = obj;
-		this.nextLinkedList = linkedList;
+	LinkedList(Object value) {
+		this.value = value;
 	}
 
+	LinkedList(Object value, LinkedList linkedList) {
+		this.value = value;
+		this.nextLink = linkedList;
+	}
+
+	/**
+	 * リストの要素をすべて表示します。
+	 *
+	 * @return String desc
+	 */
 	public String toString() {
-		String desc = obj.toString();
-		if (nextLinkedList != null) {
-			desc += ", nextLinkedObj＝" + nextLinkedList.toString();
+		String desc = value.toString();
+		if (nextLink != null) {
+			desc += ", " + nextLink.toString();
 		}
 		return desc;
 	}
