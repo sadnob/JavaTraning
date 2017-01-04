@@ -2,18 +2,21 @@ package jpl.ch03.ex03;
 
 class Y extends X {
 
-	protected static final int yMask = 0xff00;
+	protected int yMask = 0xff00;
 
 	{
-		System.out.printf("【Yクラス初期化ブロック】\n");
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+		System.out.printf("Yクラス初期化ブロック\n");
+		display();
 	}
 
 	public Y() {
-		System.out.printf("【Yクラスコンストラクタ】\n");
+		System.out.printf("Yクラスコンストラクタ\n");
 		fullMask |= yMask;
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+		display();
+	}
 
+	public void display() {
+		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
 	}
 
 	public static void main(String[] args) {

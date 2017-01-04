@@ -41,7 +41,7 @@ public class PassengerVehicle extends Vehicle implements Cloneable {
 		return NUMBER_OF_SEATS;
 	}
 
-	/** getter：passenger */
+	/**  getter：passenger  */
 	public int getPassenger() {
 		return passenger;
 	}

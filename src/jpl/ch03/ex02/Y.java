@@ -6,14 +6,17 @@ class Y extends X {
 
 	{
 		System.out.printf("Yクラス初期化ブロック\n");
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+		display();
 	}
 
 	public Y() {
 		System.out.printf("Yクラスコンストラクタ\n");
 		fullMask |= yMask;
-		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
+		display();
+	}
 
+	public void display() {
+		System.out.printf("xMask：%x, fullMask：%x, yMask：%x\n",xMask,fullMask,yMask);
 	}
 
 	public static void main(String[] args) {

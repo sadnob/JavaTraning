@@ -1,13 +1,13 @@
-package jpl.ch03.ex06;
+package jpl.ch04.ex01;
 
-public class Battery extends EnergySource {
+public class Battery implements EnergySource {
 
 	private int level;
 
 	public Battery(int level){
 		this.level = level;
 	}
-	boolean empty(){
+	public boolean empty(){
 		if(level == 0)return true;
 		else return false;
 	}

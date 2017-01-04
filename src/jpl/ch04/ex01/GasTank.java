@@ -1,13 +1,13 @@
-package jpl.ch03.ex06;
+package jpl.ch04.ex01;
 
-public class GasTank extends EnergySource {
+public class GasTank implements EnergySource {
 
 	private int amount;
 
 	public GasTank(int amount){
 		this.amount = amount;
 	}
-	boolean empty(){
+	public boolean empty(){
 		if(amount == 0)return true;
 		else return false;
 	}
