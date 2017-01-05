@@ -1,69 +1,94 @@
 package jpl.ch05.ex02;
 
-
+import java.util.LinkedList;
 
 public class BankAccount {
-	private long number;        // 講座番号
-	private long balance;        // 現在の残高（単位は、 セント）
-	private Action lastAct;  // 最後に行われた処理
-	private History history = new History();  // 最後の10個の処理
 
-	public class Action {
+	private long number;
+	private long balance;
+	protected LinkedList<Action> lastActionList = new LinkedList<Action>();
+	private int historyNumber = 0;
+
+	public BankAccount(long number){
+		this.number = number;
+	}
+
+	private void addLastAct(Action lastAct){
+		if(lastActionList.size() == 10)lastActionList.poll();
+		lastActionList.addLast(lastAct);
+	}
+	public History history(){
+		return new History();
+	}
+
+
+	public class Action{
 		private String act;
 		private long amount;
-		Action(String act, long amount) {
+		Action(String act, long amount){
 			this.act = act;
 			this.amount = amount;
-			history.set(this);
 		}
-		public String  toString() {
-			// identify our enclosing account
-			return number + ": " + " " + amount;
+		public String toString(){
+			return number + ":" + act + " " + amount;
 		}
 	}
+	public class History{
+		private LinkedList<Action> actionList = (LinkedList<Action>)lastActionList.clone();
 
-	public class History {
-		private final int size = 10; // 履歴保存件数
-		private Action[] historyList = new Action[size]; //10件の履歴保存用配列
-		private int nextIndex = 10; // 現在の履歴閲覧
-
-		// Actionインスタンスが生成される度に履歴オブジェクトに追加するためのメソッド
-		private void set(Action act) {
-			for (int i = 1; i<size; i++) {
-				if (historyList[i] == null) {
-					historyList[i] = act;
-					break;
-				}
-			}
-			for (int i = 1; i<size-1; i++) {
-				historyList[i] = historyList[i+1];
-			}
-			historyList[size] = act;
-		}
-		// 次の履歴を取得します。
-		public Action next() {
-			Action next = historyList[nextIndex];
-			if(nextIndex == 0) {
-				nextIndex =10; // 10件前の履歴まで行ったら10件目の履歴までリセット
-			} else {
-				nextIndex -=1;
-			}
-			return next;
+		public Action next(){
+			return actionList.poll();
 		}
 	}
-
-	public void deposit(long amount) {
+	public void deposit(long amount){
 		balance += amount;
-		lastAct = new Action("deposit", amount);
+		addLastAct( new Action("deposit", amount));
 	}
 
-	public void withdraw(long amount) {
+	public void withdraw(long amount){
 		balance -= amount;
-		lastAct = new Action("withdraw",  amount);
+		addLastAct( new Action("withdraw", amount));
+	}
+	public void transfer(BankAccount other, long amount){
+		other.withdraw(amount);
+		deposit(amount);
+		addLastAct( this.new Action("transfer", amount));
+		other.addLastAct( other.new Action("transer", amount));
+	}
+	public static void main(String args[]){
+		BankAccount b1 = new BankAccount(1);
+		BankAccount b2 = new BankAccount(2);
+		b1.deposit(1000);
+		b1.withdraw(300);
+		b1.transfer(b2, 500);
+		History h1 = b1.history();
+		History h2 = b2.history();
+
+		Action a = h1.next();
+		while(a != null){
+			System.out.println(a);
+			a = h1.next();
+		}
+		a = h2.next();
+		while(a != null){
+			System.out.println(a);
+			a = h2.next();
+		}
+
+		BankAccount b3 = new BankAccount(3);
+		b3.deposit(1000);
+		b3.deposit(2000);
+		b3.deposit(3000);
+		b3.deposit(4000);
+		b3.deposit(5000);
+
+		History h3 = b3.history();
+		a = h3.next();
+		while(a != null){
+			System.out.println(a);
+			a = h3.next();
+		}
 	}
 
-	public History history () {
-		return this.history();
-	}
 
 }
