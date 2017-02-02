@@ -8,7 +8,7 @@ public class Comma {
 					.matcher(num).replaceAll(",");
 		}
     /**
-     * @param args
+     * 動作確認用mainメソッド
      */
     public static void main(String[] args) {
         System.out.println(insert("12345678910"));

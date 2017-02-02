@@ -4,25 +4,6 @@ package jpl.ch13.ex03;
 public class DelimitedString {
 
 	/**
-	 * 参考書
-	 * 文字列から区切られたサブ文字列を取り出します。
-	 */
-	private static String delimitedString(
-			String from, char start, char end) {
-
-		int startPos = from.indexOf(start);
-		int endPos = from.lastIndexOf(end);
-		if (startPos == -1)     // 開始文字が見つからない
-			return null;
-		else if (endPos == -1)  // 終了文字が見つからない
-			return from.substring(startPos);
-		else if (startPos > endPos)  // 開始文字が終了文字の後ろにある
-			return null;
-		else                          // 開始文字と終了文字が見つかった
-			return from.substring(startPos, endPos + 1);
-	}
-
-	/**
 	 * 文字列から区切られたサブ文字列を取り出します。
 	 * 複数存在する場合すべてのサブ文字列を取得します。
 	 */
@@ -33,9 +14,14 @@ public class DelimitedString {
 		String[] result;
 
 		int startPos = from.indexOf(start);
+		int endPos = from.lastIndexOf(end);
 
 		if (startPos == -1){     // 開始文字が見つからない
 			return null;
+		}else if (endPos == -1){   // 終了文字が見つからない
+			result = new String[1];
+			result[0] = from;
+			return result;
 		}else {
 			for (int i = 0; i<str.length; i++) {
 				startPos = str[i].indexOf(start);
@@ -55,20 +41,28 @@ public class DelimitedString {
 				}
 			}
 		}
-
 		return result ;
 
 	}
 	/**
-	 * mainメソッド
+	 * テスト用mainメソッド
 	 * @param args
 	 */
 	public static void main(String[] args) {
 
-		String[] result = DelimitedString.delimitedStrings("abcdefghigjlclmcnadldllcllll", 'c', 'l');
-		for (String str : result) {
+		String[] resultA = delimitedStrings("abcdefghigjlclmcnadldllcllll", 'c', 'l');
+		System.out.println("テストA　期待結果：cdefghigjl, cl, cnadl, cl");
+		for (String str : resultA) {
 			System.out.println(str);
 		}
+		String[] resultB = delimitedStrings("aaaaaaa", 'a', 'c');
+		System.out.println("テストB　期待結果：aaaaaaa");
+		for (String str : resultB) {
+			System.out.println(str);
+		}
+		String[] resultC = delimitedStrings("daefeseew", 'q', 'z');
+		System.out.println("テストC　期待結果：null");
+		System.out.println(resultC);
 
 	}
 
