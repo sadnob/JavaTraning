@@ -27,19 +27,23 @@ public class PropertyDialog extends Dialog implements ActionListener,
 	Choice choiceFontColor = new Choice();
 	Choice choiceBackgroundColor = new Choice();
 
-	// デフォルトの値
-	String defaultFontColor;
-	String defaultBackgroundColor;
+	// 色ColorのSring
+	public String strFontColor;
+	public String strBackGroundColor;
 
 	// 変更後の値
 	String newFontType = "TimesRoman";
 	int newFontSize = 40;
-	Color newFontColor = Color.black;
-	Color newBackgroundColor = Color.white;
+	Color newFontColor = Color.BLACK;
+	Color newBackgroundColor = Color.WHITE;
 
 	// ボタン
 	Button OKButton = new Button("OK");
 	Button CancelButton = new Button("キャンセル");
+
+	// Color ⇔ String
+	private static final Color colorList[] = { Color.BLACK, Color.RED, Color.green, Color.BLUE, Color.WHITE };
+	private static final String colorStrList[] = { "black", "red", "green", "blue", "white" };
 
 	DigitalClock digitalClock;
 
@@ -61,7 +65,6 @@ public class PropertyDialog extends Dialog implements ActionListener,
 		setResizable(false);// 大きさ固定
 
 		topPanel.setLayout(new GridLayout());
-
 
 		this.add(topPanel, BorderLayout.NORTH);
 		this.add(bottomPanel, BorderLayout.SOUTH);
@@ -98,15 +101,15 @@ public class PropertyDialog extends Dialog implements ActionListener,
 
 		// フォントカラーの初期選択値をStringで取得する
 		if (Color.black == digitalClock.getFontColor()) {
-			defaultFontColor = "black";
+			strFontColor = "black";
 		} else if (Color.red == digitalClock.getFontColor()) {
-			defaultFontColor = "red";
+			strFontColor = "red";
 		} else if (Color.green == digitalClock.getFontColor()) {
-			defaultFontColor = "green";
+			strFontColor = "green";
 		} else if (Color.blue == digitalClock.getFontColor()) {
-			defaultFontColor = "blue";
+			strFontColor = "blue";
 		} else {
-			defaultFontColor = "black";
+			strFontColor = "black";
 		}
 
 		// フォントカラー
@@ -115,18 +118,18 @@ public class PropertyDialog extends Dialog implements ActionListener,
 		choiceFontColor.add("red");
 		choiceFontColor.add("green");
 		choiceFontColor.add("blue");
-		choiceFontColor.select(defaultFontColor);
+		choiceFontColor.select(strFontColor);
 		topPanel.add(choiceFontColor);
 
 		// 背景色の初期選択値をStringで取得する
 		if (Color.white == digitalClock.getBackgroundColor()) {
-			defaultBackgroundColor = "white";
+			strBackGroundColor = "white";
 		} else if (Color.black == digitalClock.getBackgroundColor()) {
-			defaultBackgroundColor = "black";
+			strBackGroundColor = "black";
 		} else if (Color.orange == digitalClock.getBackgroundColor()) {
-			defaultBackgroundColor = "orange";
+			strBackGroundColor = "orange";
 		} else {
-			defaultBackgroundColor = "white";
+			strBackGroundColor = "white";
 		}
 
 		// 背景色
@@ -134,7 +137,7 @@ public class PropertyDialog extends Dialog implements ActionListener,
 		choiceBackgroundColor.add("white");
 		choiceBackgroundColor.add("black");
 		choiceBackgroundColor.add("orange");
-		choiceBackgroundColor.select(defaultBackgroundColor);
+		choiceBackgroundColor.select(strBackGroundColor);
 		topPanel.add(choiceBackgroundColor);
 
 		// ボタン
@@ -156,8 +159,10 @@ public class PropertyDialog extends Dialog implements ActionListener,
 			digitalClock.setFontSize(newFontSize);
 			digitalClock.setFontColor(newFontColor);
 			digitalClock.setBackgroundColor(newBackgroundColor);
+			digitalClock.setStrFontColor(colorToString(newFontColor));
+			digitalClock.setStrBackGroundColor(colorToString(newBackgroundColor));
 			setVisible(false);
-		} else if("キャンセル" == e.getActionCommand()) {
+		} else if ("キャンセル" == e.getActionCommand()) {
 			digitalClock.setBounds(0, 0, 200, 100);
 			setVisible(false);
 		}
@@ -199,5 +204,24 @@ public class PropertyDialog extends Dialog implements ActionListener,
 				newBackgroundColor = Color.white;
 			}
 		}
+	}
+
+	// 受け取ったColorの文字列をColorオブジェクトに変換します。
+	public static String colorToString(Color color) {
+		for (int i = 0; i < colorList.length; i++) {
+			if (color.equals(colorList[i])) {
+				return colorStrList[i];
+			}
+		}
+		return colorStrList[0];
+	}
+	// 受け取ったColorの文字列をColorオブジェクトに変換します。
+	public static Color stringToColor(String colorStr) {
+		for (int i = 0; i < colorStrList.length; i++) {
+			if (colorStr.equals(colorStrList[i])) {
+				return colorList[i];
+			}
+		}
+		return colorList[0];
 	}
 }

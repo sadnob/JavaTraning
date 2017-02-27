@@ -36,6 +36,8 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
 	private Integer fontSize = 40;
 	private Color fontColor = Color.black;
 	private Color backgroundColor = Color.white;
+	private String strFontColor = "black";
+	private String strBackGroundColor = "white";
 
 	// ウィンドウのサイズ
 	private int windowSizeX = 0;
@@ -71,25 +73,6 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
 
 		prefs = Preferences.userNodeForPackage(this.getClass());
 
-		// ウィンドウを閉じられるようにする
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				// 現在のウィンドウの情報を保存
-				prefs.putInt(KEY1, getFontSize());
-				prefs.put(KEY2, getFontType());
-				//String color = getFontColor().toString();
-				//System.out.println(color);
-				//prefs.put(KEY3, color);
-				//prefs.put(KEY4, getBackgroundColor().toString());
-
-				// 現在の表示位置を保存
-				prefs.putInt(KEY_X, getX());
-				prefs.putInt(KEY_Y, getY());
-
-				System.exit(0);
-			}
-		});
-
 		// メニューバーを作成する
 		menuBar = new MenuBar();
 
@@ -113,15 +96,40 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
 		minuteInteger = Calendar.getInstance().get(Calendar.MINUTE);
 		secondInteger = Calendar.getInstance().get(Calendar.SECOND);
 
+		// ウィンドウを閉じられるようにする
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				// 現在のウィンドウの情報を保存
+				prefs.putInt(KEY1, getFontSize());
+				prefs.put(KEY2, getFontType());
+				prefs.put(KEY3, PropertyDialog.colorToString(fontColor));
+				prefs.put(KEY4, PropertyDialog.colorToString(backgroundColor));
+				/*System.out.println(getFontSize());
+				System.out.println(getFontType());
+				System.out.println( PropertyDialog.colorToString(fontColor));
+				System.out.println(PropertyDialog.colorToString(backgroundColor));*/
+
+				// 現在の表示位置を保存
+				prefs.putInt(KEY_X, getX());
+				prefs.putInt(KEY_Y, getY());
+
+				System.exit(0);
+			}
+		});
+
 		// 最後に閉じた状態を復元
-		fontSize = prefs.getInt(KEY1, getFontSize());
-		fontType = prefs.get(KEY2, getFontType());
-		//String color = prefs.get(KEY3, getFontColor().toString());
-		//fontColor = Color.getColor(color);
-		//String background = prefs.get(KEY4, getBackgroundColor().toString());
-		//backgroundColor = Color.getColor(background);
+		fontSize = prefs.getInt(KEY1, fontSize);
+		fontType = prefs.get(KEY2, fontType);
+		fontColor = PropertyDialog.stringToColor(prefs.get(KEY3, "black"));
+		backgroundColor = PropertyDialog.stringToColor(prefs.get(KEY4, strBackGroundColor));
 		positionX = prefs.getInt(KEY_X, 0);
-		positionY = prefs.getInt(KEY_Y, 0);
+		positionX = prefs.getInt(KEY_Y, 0);
+		setBounds(positionX, positionX, 200, 100);
+/*		System.out.println(getFontSize());
+		System.out.println(getFontType());
+		System.out.println( PropertyDialog.colorToString(fontColor));
+		System.out.println(PropertyDialog.colorToString(backgroundColor));*/
+
 
 	}
 
@@ -156,10 +164,10 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
 		windowSizeY += graphicBuffer.getFontMetrics().getLeading();
 		windowSizeY += getInsets().top;
 
-		//setPositionX(getX());
-		//setPositionY(getY());
+		setPositionX(getX());
+		setPositionY(getY());
 		// ウィンドウ情報（位置・サイズ）設定
-		setBounds(getPositionX(), getPositionY(), windowSizeX, windowSizeY);
+		setSize(windowSizeX, windowSizeY);
 
 
 		imageBuffer = createImage(windowSizeX, windowSizeY);
@@ -244,6 +252,22 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
 
 	public void setFontSetting(Font fontSetting) {
 		this.fontSetting = fontSetting;
+	}
+
+	public String getStrFontColor() {
+		return strFontColor;
+	}
+
+	public void setStrFontColor(String strFontColor) {
+		this.strFontColor = strFontColor;
+	}
+
+	public String getStrBackGroundColor() {
+		return strBackGroundColor;
+	}
+
+	public void setStrBackGroundColor(String strBackGroundColor) {
+		this.strBackGroundColor = strBackGroundColor;
 	}
 
 	public int getPositionX() {
