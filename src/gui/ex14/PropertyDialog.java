@@ -17,211 +17,200 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class PropertyDialog extends Dialog implements ActionListener,
-		ItemListener {
+                ItemListener {
 
-	Panel topPanel = new Panel();
-	Panel bottomPanel = new Panel();
+        Panel topPanel = new Panel();
+        Panel bottomPanel = new Panel();
 
-	Choice choiceFontType = new Choice();
-	Choice choiceFontSize = new Choice();
-	Choice choiceFontColor = new Choice();
-	Choice choiceBackgroundColor = new Choice();
 
-	// 色ColorのSring
-	public String strFontColor;
-	public String strBackGroundColor;
+        Choice choiceFontType = new Choice();
+        Choice choiceFontSize = new Choice();
+        Choice choiceFontColor = new Choice();
+        Choice choiceBackgroundColor = new Choice();
 
-	// 変更後の値
-	String newFontType = "TimesRoman";
-	int newFontSize = 40;
-	Color newFontColor = Color.BLACK;
-	Color newBackgroundColor = Color.WHITE;
+        // 色ColorのSring
+        public String strFontColor;
+        public String strBackGroundColor;
 
-	// ボタン
-	Button OKButton = new Button("OK");
-	Button CancelButton = new Button("キャンセル");
+        // 変更後の値
+        String newFontType = "TimesRoman";
+        int newFontSize = 40;
+        Color newFontColor = Color.BLACK;
+        Color newBackgroundColor = Color.WHITE;
+        int xPosition;
+        int yPosition;
 
-	// Color ⇔ String
-	private static final Color colorList[] = { Color.BLACK, Color.RED, Color.green, Color.BLUE, Color.WHITE };
-	private static final String colorStrList[] = { "black", "red", "green", "blue", "white" };
+        // ボタン
+        Button OKButton = new Button("OK");
+        Button CancelButton = new Button("キャンセル");
 
-	DigitalClock digitalClock;
+        // Color ⇔ String
+        private static final Color colorList[] = { Color.BLACK, Color.RED, Color.green, Color.BLUE, Color.WHITE };
+        private static final String colorStrList[] = { "black", "red", "green", "blue", "white" };
 
-	public PropertyDialog(Frame owner) {
+        DigitalClock digitalClock;
 
-		super(owner);
+        public PropertyDialog(Frame owner) {
 
-		digitalClock = (DigitalClock) owner;
+                super(owner);
 
-		// 現在の時計の設定を取得する
-		newFontType = digitalClock.getFontType();
-		newFontSize = digitalClock.getFontSize();
-		newFontColor = digitalClock.getFontColor();
-		newBackgroundColor = digitalClock.getBackgroundColor();
+                digitalClock = (DigitalClock) owner;
 
-		setLayout(new BorderLayout());
-		setTitle("Property");// タイトル
-		setSize(300, 180);// ウィンドウサイズ
-		setResizable(false);// 大きさ固定
+                // 現在の時計の設定を取得する
+                newFontType = digitalClock.getFontType();
+                newFontSize = digitalClock.getFontSize();
+                newFontColor = digitalClock.getFontColor();
+                newBackgroundColor = digitalClock.getBackgroundColor();
 
-		topPanel.setLayout(new GridLayout());
+                setLayout(new BorderLayout());
+                setTitle("Property");// タイトル
+                System.out.println(xPosition);
+                System.out.println(yPosition);
+                setSize(300, 180);// ウィンドウサイズ
+                setResizable(false);// 大きさ固定
 
-		this.add(topPanel, BorderLayout.NORTH);
-		this.add(bottomPanel, BorderLayout.SOUTH);
+                topPanel.setLayout(new GridLayout());
 
-		topPanel.setLayout(new GridLayout(4, 2));
+                this.add(topPanel, BorderLayout.NORTH);
+                this.add(bottomPanel, BorderLayout.SOUTH);
 
-		// リスナー登録
-		choiceFontType.addItemListener(this);
-		choiceFontSize.addItemListener(this);
-		choiceFontColor.addItemListener(this);
-		choiceBackgroundColor.addItemListener(this);
-		OKButton.addActionListener(this);
-		CancelButton.addActionListener(this);
+                topPanel.setLayout(new GridLayout(4, 2));
 
-		// フォントタイプ
-		topPanel.add(new Label("Font Type: "));
-		choiceFontType.add("TimesRoman");
-		choiceFontType.add("Serif");
-		choiceFontType.add("Monospaced");
+                // リスナー登録
+                choiceFontType.addItemListener(this);
+                choiceFontSize.addItemListener(this);
+                choiceFontColor.addItemListener(this);
+                choiceBackgroundColor.addItemListener(this);
+                OKButton.addActionListener(this);
+                CancelButton.addActionListener(this);
 
-		choiceFontType.select(digitalClock.getFontType());
-		topPanel.add(choiceFontType);
+                // フォントタイプ
+                topPanel.add(new Label("Font Type: "));
+                choiceFontType.add("TimesRoman");
+                choiceFontType.add("Serif");
+                choiceFontType.add("Monospaced");
 
-		// フォントサイズ
-		topPanel.add(new Label("Font Size: "));
-		choiceFontSize.add("36");
-		choiceFontSize.add("48");
-		choiceFontSize.add("60");
-		choiceFontSize.add("72");
-		choiceFontSize.add("96");
-		choiceFontSize.add("120");
-		choiceFontSize.select(digitalClock.getFontSize().toString());
-		topPanel.add(choiceFontSize);
+                choiceFontType.select(digitalClock.getFontType());
+                topPanel.add(choiceFontType);
 
-		// フォントカラーの初期選択値をStringで取得する
-		if (Color.black == digitalClock.getFontColor()) {
-			strFontColor = "black";
-		} else if (Color.red == digitalClock.getFontColor()) {
-			strFontColor = "red";
-		} else if (Color.green == digitalClock.getFontColor()) {
-			strFontColor = "green";
-		} else if (Color.blue == digitalClock.getFontColor()) {
-			strFontColor = "blue";
-		} else {
-			strFontColor = "black";
-		}
+                // フォントサイズ
+                topPanel.add(new Label("Font Size: "));
+                choiceFontSize.add("36");
+                choiceFontSize.add("48");
+                choiceFontSize.add("60");
+                choiceFontSize.add("72");
+                choiceFontSize.add("96");
+                choiceFontSize.add("120");
+                choiceFontSize.select(digitalClock.getFontSize().toString());
+                topPanel.add(choiceFontSize);
 
-		// フォントカラー
-		topPanel.add(new Label("Font Color: "));
-		choiceFontColor.add("black");
-		choiceFontColor.add("red");
-		choiceFontColor.add("green");
-		choiceFontColor.add("blue");
-		choiceFontColor.select(strFontColor);
-		topPanel.add(choiceFontColor);
+                // フォントカラーの初期選択値をStringで取得する
+                        strFontColor = colorToString(digitalClock.getFontColor());
 
-		// 背景色の初期選択値をStringで取得する
-		if (Color.white == digitalClock.getBackgroundColor()) {
-			strBackGroundColor = "white";
-		} else if (Color.black == digitalClock.getBackgroundColor()) {
-			strBackGroundColor = "black";
-		} else if (Color.orange == digitalClock.getBackgroundColor()) {
-			strBackGroundColor = "orange";
-		} else {
-			strBackGroundColor = "white";
-		}
+                // フォントカラー
+                topPanel.add(new Label("Font Color: "));
+                choiceFontColor.add("black");
+                choiceFontColor.add("red");
+                choiceFontColor.add("green");
+                choiceFontColor.add("blue");
+                choiceFontColor.select(strFontColor);
+                topPanel.add(choiceFontColor);
 
-		// 背景色
-		topPanel.add(new Label("Background Color: "));
-		choiceBackgroundColor.add("white");
-		choiceBackgroundColor.add("black");
-		choiceBackgroundColor.add("orange");
-		choiceBackgroundColor.select(strBackGroundColor);
-		topPanel.add(choiceBackgroundColor);
+                // 背景色の初期選択値をStringで取得する
+                        strBackGroundColor = colorToString(digitalClock.getBackgroundColor());
 
-		// ボタン
-		bottomPanel.add(OKButton);
-		bottomPanel.add(CancelButton);
+                // 背景色
+                topPanel.add(new Label("Background Color: "));
+                choiceBackgroundColor.add("white");
+                choiceBackgroundColor.add("black");
+                choiceBackgroundColor.add("orange");
+                choiceBackgroundColor.select(strBackGroundColor);
+                topPanel.add(choiceBackgroundColor);
 
-		// ダイアログボックスを閉じるとき
-		addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent e) {
-				setVisible(false);
-			}
-		});
-	}
+                // ボタン
+                bottomPanel.add(OKButton);
+                bottomPanel.add(CancelButton);
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if ("OK" == e.getActionCommand()) {
-			digitalClock.setFontType(newFontType);
-			digitalClock.setFontSize(newFontSize);
-			digitalClock.setFontColor(newFontColor);
-			digitalClock.setBackgroundColor(newBackgroundColor);
-			digitalClock.setStrFontColor(colorToString(newFontColor));
-			digitalClock.setStrBackGroundColor(colorToString(newBackgroundColor));
-			setVisible(false);
-		} else if ("キャンセル" == e.getActionCommand()) {
-			digitalClock.setBounds(0, 0, 200, 100);
-			setVisible(false);
-		}
-	}
+                // ダイアログボックスを閉じるとき
+                addWindowListener(new WindowAdapter() {
+                        public void windowClosing(WindowEvent e) {
+                                setVisible(false);
+                        }
+                });
+        }
 
-	@Override
-	public void itemStateChanged(ItemEvent e) {
-		// フォントタイプが選択された場合
-		if (choiceFontType == e.getSource()) {
-			newFontType = e.getItem().toString();
-		}
-		// フォントサイズが選択された場合
-		else if (choiceFontSize == e.getSource()) {
-			newFontSize = Integer.parseInt(e.getItem().toString());
-		}
-		// フォントカラーが選択された場合
-		else if (choiceFontColor == e.getSource()) {
-			if ("black" == e.getItem()) {
-				newFontColor = Color.black;
-			} else if ("red" == e.getItem()) {
-				newFontColor = Color.red;
-			} else if ("green" == e.getItem()) {
-				newFontColor = Color.green;
-			} else if ("blue" == e.getItem()) {
-				newFontColor = Color.blue;
-			} else {
-				newFontColor = Color.black;
-			}
-		}
-		// 背景色が選択された場合
-		else if (choiceBackgroundColor == e.getSource()) {
-			if ("white" == e.getItem()) {
-				newBackgroundColor = Color.white;
-			} else if ("black" == e.getItem()) {
-				newBackgroundColor = Color.black;
-			} else if ("orange" == e.getItem()) {
-				newBackgroundColor = Color.orange;
-			} else {
-				newBackgroundColor = Color.white;
-			}
-		}
-	}
+        @Override
+        public void actionPerformed(ActionEvent e) {
+                if ("OK" == e.getActionCommand()) {
+                        digitalClock.setFontType(newFontType);
+                        digitalClock.setFontSize(newFontSize);
+                        digitalClock.setFontColor(newFontColor);
+                        digitalClock.setBackgroundColor(newBackgroundColor);
+                        digitalClock.setStrFontColor(colorToString(newFontColor));
+                        digitalClock.setStrBackGroundColor(colorToString(newBackgroundColor));
+                        setVisible(false);
+                } else if ("キャンセル" == e.getActionCommand()) {
+                        System.out.println(digitalClock.getPositionX());
+                        System.out.println(digitalClock.getPositionY());
+                        digitalClock.setBounds(digitalClock.getPositionX(), digitalClock.getPositionY(), 200, 100);
+                        setVisible(false);
+                }
+        }
 
-	// 受け取ったColorの文字列をColorオブジェクトに変換します。
-	public static String colorToString(Color color) {
-		for (int i = 0; i < colorList.length; i++) {
-			if (color.equals(colorList[i])) {
-				return colorStrList[i];
-			}
-		}
-		return colorStrList[0];
-	}
-	// 受け取ったColorの文字列をColorオブジェクトに変換します。
-	public static Color stringToColor(String colorStr) {
-		for (int i = 0; i < colorStrList.length; i++) {
-			if (colorStr.equals(colorStrList[i])) {
-				return colorList[i];
-			}
-		}
-		return colorList[0];
-	}
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+                // フォントタイプが選択された場合
+                if (choiceFontType == e.getSource()) {
+                        newFontType = e.getItem().toString();
+                }
+                // フォントサイズが選択された場合
+                else if (choiceFontSize == e.getSource()) {
+                        newFontSize = Integer.parseInt(e.getItem().toString());
+                }
+                // フォントカラーが選択された場合
+                else if (choiceFontColor == e.getSource()) {
+                        if ("black" == e.getItem()) {
+                                newFontColor = Color.black;
+                        } else if ("red" == e.getItem()) {
+                                newFontColor = Color.red;
+                        } else if ("green" == e.getItem()) {
+                                newFontColor = Color.green;
+                        } else if ("blue" == e.getItem()) {
+                                newFontColor = Color.blue;
+                        } else {
+                                newFontColor = Color.black;
+                        }
+                }
+                // 背景色が選択された場合
+                else if (choiceBackgroundColor == e.getSource()) {
+                        if ("white" == e.getItem()) {
+                                newBackgroundColor = Color.white;
+                        } else if ("black" == e.getItem()) {
+                                newBackgroundColor = Color.black;
+                        } else if ("orange" == e.getItem()) {
+                                newBackgroundColor = Color.orange;
+                        } else {
+                                newBackgroundColor = Color.white;
+                        }
+                }
+        }
+
+        // 受け取ったColorの文字列をColorオブジェクトに変換します。
+        public static String colorToString(Color color) {
+                for (int i = 0; i < colorList.length; i++) {
+                        if (color.equals(colorList[i])) {
+                                return colorStrList[i];
+                        }
+                }
+                return colorStrList[0];
+        }
+        // 受け取ったColorの文字列をColorオブジェクトに変換します。
+        public static Color stringToColor(String colorStr) {
+                for (int i = 0; i < colorStrList.length; i++) {
+                        if (colorStr.equals(colorStrList[i])) {
+                                return colorList[i];
+                        }
+                }
+                return colorList[0];
+        }
 }
