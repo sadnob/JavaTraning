@@ -16,13 +16,6 @@ import java.util.Calendar;
 import java.util.prefs.Preferences;
 
 public class DigitalClock extends Frame implements Runnable, ActionListener {
-        private Integer hourInteger; // 時
-        private Integer minuteInteger; // 分
-        private Integer secondInteger; // 秒
-
-        private String hourString;
-        private String minuteString;
-        private String secondString;
 
         private Thread th;
         private PropertyDialog dialog;
@@ -30,6 +23,17 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
         private MenuItem menuProperty;
         private Image imageBuffer;
         private Graphics graphicBuffer;
+
+        // 時・分・秒
+        private Integer hourInteger;
+        private Integer minuteInteger;
+        private Integer secondInteger;
+
+        // 表示時間文字列
+        private String hourString;
+        private String minuteString;
+        private String secondString;
+
 
         // 設定値(フォント、背景)
         private String fontType = "TimesRoman";

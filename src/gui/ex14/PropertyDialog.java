@@ -1,12 +1,13 @@
 package gui.ex14;
 
-import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Frame;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
@@ -19,9 +20,7 @@ import java.awt.event.WindowEvent;
 public class PropertyDialog extends Dialog implements ActionListener,
                 ItemListener {
 
-        Panel topPanel = new Panel();
-        Panel bottomPanel = new Panel();
-
+        private GridBagLayout gbl = new GridBagLayout();
 
         Choice choiceFontType = new Choice();
         Choice choiceFontSize = new Choice();
@@ -41,6 +40,7 @@ public class PropertyDialog extends Dialog implements ActionListener,
         int yPosition;
 
         // ボタン
+        Panel bottom = new Panel();
         Button OKButton = new Button("OK");
         Button CancelButton = new Button("キャンセル");
 
@@ -62,19 +62,11 @@ public class PropertyDialog extends Dialog implements ActionListener,
                 newFontColor = digitalClock.getFontColor();
                 newBackgroundColor = digitalClock.getBackgroundColor();
 
-                setLayout(new BorderLayout());
+                setLayout(gbl);
                 setTitle("Property");// タイトル
-                System.out.println(xPosition);
-                System.out.println(yPosition);
                 setSize(300, 180);// ウィンドウサイズ
                 setResizable(false);// 大きさ固定
 
-                topPanel.setLayout(new GridLayout());
-
-                this.add(topPanel, BorderLayout.NORTH);
-                this.add(bottomPanel, BorderLayout.SOUTH);
-
-                topPanel.setLayout(new GridLayout(4, 2));
 
                 // リスナー登録
                 choiceFontType.addItemListener(this);
@@ -84,17 +76,14 @@ public class PropertyDialog extends Dialog implements ActionListener,
                 OKButton.addActionListener(this);
                 CancelButton.addActionListener(this);
 
-                // フォントタイプ
-                topPanel.add(new Label("Font Type: "));
+                // 種類追加
                 choiceFontType.add("TimesRoman");
                 choiceFontType.add("Serif");
                 choiceFontType.add("Monospaced");
-
                 choiceFontType.select(digitalClock.getFontType());
-                topPanel.add(choiceFontType);
 
-                // フォントサイズ
-                topPanel.add(new Label("Font Size: "));
+
+                // フォントサイズ追加
                 choiceFontSize.add("36");
                 choiceFontSize.add("48");
                 choiceFontSize.add("60");
@@ -102,34 +91,56 @@ public class PropertyDialog extends Dialog implements ActionListener,
                 choiceFontSize.add("96");
                 choiceFontSize.add("120");
                 choiceFontSize.select(digitalClock.getFontSize().toString());
-                topPanel.add(choiceFontSize);
 
-                // フォントカラーの初期選択値をStringで取得する
-                        strFontColor = colorToString(digitalClock.getFontColor());
 
-                // フォントカラー
-                topPanel.add(new Label("Font Color: "));
+                // フォントカラー追加
                 choiceFontColor.add("black");
                 choiceFontColor.add("red");
                 choiceFontColor.add("green");
                 choiceFontColor.add("blue");
+                strFontColor = colorToString(digitalClock.getFontColor()); // フォントカラーの初期選択値をStringで取得する
                 choiceFontColor.select(strFontColor);
-                topPanel.add(choiceFontColor);
 
-                // 背景色の初期選択値をStringで取得する
-                        strBackGroundColor = colorToString(digitalClock.getBackgroundColor());
 
                 // 背景色
-                topPanel.add(new Label("Background Color: "));
                 choiceBackgroundColor.add("white");
                 choiceBackgroundColor.add("black");
                 choiceBackgroundColor.add("orange");
+                strBackGroundColor = colorToString(digitalClock.getBackgroundColor()); // 背景色の初期選択値をStringで取得する
                 choiceBackgroundColor.select(strBackGroundColor);
-                topPanel.add(choiceBackgroundColor);
 
-                // ボタン
-                bottomPanel.add(OKButton);
-                bottomPanel.add(CancelButton);
+
+                // 属性配置
+		        addComponent(new Label("Font Type: "), 0,0, 1, 1, GridBagConstraints.EAST);
+		        addComponent(choiceFontType, 1, 0, 1, 1,GridBagConstraints.WEST);
+		        addComponent(new Label("Font Size: "), 0, 1, 1, 1, GridBagConstraints.EAST);
+		        addComponent(choiceFontSize, 1, 1, 1, 1,GridBagConstraints.WEST);
+		        addComponent(new Label("Font Color: "), 0,2, 1, 1, GridBagConstraints.EAST);
+		        addComponent(choiceFontColor, 1, 2, 1, 1,GridBagConstraints.WEST);
+		        addComponent(new Label("Background Color: "), 0, 3, 1, 1, GridBagConstraints.EAST);
+		        addComponent(choiceBackgroundColor, 1, 3, 1, 1,GridBagConstraints.WEST);
+		        // ボタン
+		        addComponent(OKButton, 0,4, 1, 1, GridBagConstraints.EAST);
+		        addComponent(CancelButton, 1,4, 1, 1, GridBagConstraints.WEST);
+
+		        /*gbc.gridx = 2;
+		        gbc.gridy = 4;
+		        gbc.gridwidth = 1;
+		        gbc.gridheight = 1;
+		        gbc.weightx = 1.0d;
+		        gbc.weighty = 1.0d;
+		        gbl.setConstraints(OKButton, gbc);
+		        this.add(OKButton);*/
+
+		        /*gbc.gridx = 3;
+		        gbc.gridy = 4;
+		        gbc.gridwidth = 1;
+		        gbc.gridheight = 1;
+		        gbc.weightx = 1.0d;
+		        gbc.weighty = 1.0d;
+		        gbl.setConstraints(CancelButton, gbc);
+		        this.add(CancelButton);*/
+
 
                 // ダイアログボックスを閉じるとき
                 addWindowListener(new WindowAdapter() {
@@ -150,8 +161,6 @@ public class PropertyDialog extends Dialog implements ActionListener,
                         digitalClock.setStrBackGroundColor(colorToString(newBackgroundColor));
                         setVisible(false);
                 } else if ("キャンセル" == e.getActionCommand()) {
-                        System.out.println(digitalClock.getPositionX());
-                        System.out.println(digitalClock.getPositionY());
                         digitalClock.setBounds(digitalClock.getPositionX(), digitalClock.getPositionY(), 200, 100);
                         setVisible(false);
                 }
@@ -213,4 +222,19 @@ public class PropertyDialog extends Dialog implements ActionListener,
                 }
                 return colorList[0];
         }
+
+        // レイアウト設定用メソッド
+	   	 void addComponent(Component  c,  int x, int y, int w, int h, int anchor) {
+		        GridBagConstraints gbc = new GridBagConstraints();
+		        gbc.anchor = anchor;
+		        gbc.gridx = x;
+		        gbc.gridy = y;
+		        gbc.gridwidth = w;
+		        gbc.gridheight = h;
+		        gbc.weightx = 1.0d;
+		        gbc.weighty = 1.0d;
+
+		        gbl.setConstraints(c, gbc);
+		        this.add(c);
+		  }
 }
