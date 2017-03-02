@@ -12,6 +12,7 @@ public class CharCount {
 		int count = 0; // 出現数
 		int first = str.indexOf(ch) ;  // 最初に出現するインデックス
 		int last = str.lastIndexOf(ch);  // 最後に出現するインデックス
+
 		if (first < 0)
 			return -1;
 		count++;
@@ -29,12 +30,20 @@ public class CharCount {
 	 */
 	public static void main(String[] args) {
 
-		final String testStr = "abcdefgabcdabcaba";
+		String testStr = "abcdefgabcdabcaba";
+
 		final char testCh = 'a';
-		int count = count(testStr, testCh);
 
 		System.out.println("文字列："+ testStr);
-		System.out.println(count);
+		System.out.println(count(testStr, testCh));
+
+		testStr = "aaaaaaa";
+		System.out.println("文字列："+ testStr);
+		System.out.println(count(testStr, testCh));
+
+		testStr = "";
+		System.out.println("文字列："+ testStr);
+		System.out.println(count(testStr, testCh));
 
 	}
 

@@ -29,12 +29,20 @@ public class StrCount {
 	 */
 	public static void main(String[] args) {
 
-		final String testStr1 = "abcdefgabcdabcaba";
-		final String testStr2 = "ab";
-		int count = count(testStr1, testStr2);
+		String testStr1 = "abcdefgabcdabcaba";
+		String testStr2 = "ab";
 
 		System.out.println("文字列："+ testStr2);
-		System.out.println(count);
+		System.out.println(count(testStr1, testStr2));
+
+		testStr1 = "dddddddddd";
+		testStr2 = "d";
+		System.out.println("文字列："+ testStr2);
+		System.out.println(count(testStr1, testStr2));
+
+		testStr1 = "";
+		System.out.println("文字列："+ testStr2);
+		System.out.println(count(testStr1, testStr2));
 
 	}
 

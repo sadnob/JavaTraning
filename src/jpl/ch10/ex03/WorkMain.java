@@ -2,9 +2,9 @@ package jpl.ch10.ex03;
 
 public class WorkMain {
 
+/* if文よりも"働く日" "働かない日" が分かりやすいので、switch文の方が明瞭なコードである*/
 	public static void main(String[] args) {
 
-		System.out.println("働く日 ⇒ true, 休み ⇒ false");
 		System.out.println("Sunday: " + isWorkDay(Week.SUNDAY));
 		System.out.println("Monday: " + isWorkDay(Week.MONDAY));
 		System.out.println("Tuesday: " + isWorkDay(Week.TUESDAY));
@@ -30,12 +30,17 @@ public class WorkMain {
 		boolean work = true;
 
 		switch (day) {
-			case MONDAY:	case TUESDAY:	case WEDNESDAY:	case THURSDAY:	case FRIDAY:
-				break;
+		case MONDAY:
+		case TUESDAY:
+		case WEDNESDAY:
+		case THURSDAY:
+		case FRIDAY:
+			break;
 
-			case SATURDAY: 		case SUNDAY:
-				work = false;
-				break;
+		case SATURDAY:
+		case SUNDAY:
+			work = false;
+			break;
 		}
 		return work;
 	}

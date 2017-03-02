@@ -2,16 +2,16 @@ package jpl.ch10.ex05;
 
 public class BetweenCharacter {
 
-	private static final char[] = {'A','B','C','D','E'};
-
-	public static void main(String[] args) {
-
-
+	static public void interpolation(char start, char end) {
+		if (start < end) {
+			while (start <= end) {System.out.println(start++); }
+		} else {
+			while (start >= end) {System.out.println(start--); }
+		}
 	}
 
-	//private static char[] getBetweenChar(char first, char last) {
-
-
-	//{
+	public static void main(String[] args) {
+		interpolation('a', 'z');
+	}
 
 }

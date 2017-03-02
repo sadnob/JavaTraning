@@ -108,6 +108,8 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
                                 prefs.put(KEY2, getFontType());
                                 prefs.put(KEY3, PropertyDialog.colorToString(fontColor));
                                 prefs.put(KEY4, PropertyDialog.colorToString(backgroundColor));
+                                //System.out.println(PropertyDialog.colorToString(fontColor));
+                                //System.out.println(PropertyDialog.colorToString(backgroundColor));
 
                                 // 現在の表示位置を保存
                                 prefs.putInt(KEY_X, getX());
@@ -120,7 +122,7 @@ public class DigitalClock extends Frame implements Runnable, ActionListener {
                 // 最後に閉じた状態を復元
                 fontSize = prefs.getInt(KEY1, fontSize);
                 fontType = prefs.get(KEY2, fontType);
-                fontColor = PropertyDialog.stringToColor(prefs.get(KEY3, "black"));
+                fontColor = PropertyDialog.stringToColor(prefs.get(KEY3, strFontColor));
                 backgroundColor = PropertyDialog.stringToColor(prefs.get(KEY4, strBackGroundColor));
                 positionX = prefs.getInt(KEY_X, 0);
                 positionY = prefs.getInt(KEY_Y, 0);
